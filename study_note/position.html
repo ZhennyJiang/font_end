@@ -6,25 +6,25 @@
     <title>Document</title>
     <style>
       .w {
-        width: 1000px;
-        margin: auto;
+        margin: 0 auto;
+        width: 1200px;
+        height: 1800px;
+        background-color: palegoldenrod;
       }
-      .header {
+      .fixed {
+        width: 100px;
         height: 100px;
         background-color: pink;
-        margin: 30px auto;
-      }
-      span {
-        background-color: pink;
-        display: inline-block;
-      }
-      input {
-        float: left;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        margin-left: 605px;
       }
     </style>
   </head>
   <body>
-    <div class="w header"></div>
-    <input type="text" /> <input type="text" />
+    <div class="w">
+      <div class="fixed"></div>
+    </div>
   </body>
 </html>
