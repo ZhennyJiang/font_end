@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css3过度练习</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .bar {
+        width: 160px;
+        height: 20px;
+        margin: 100px auto;
+        border: 1px solid red;
+        border-radius: 20px;
+        padding: 1px;
+      }
+      .bar_in {
+        width: 50%;
+        height: 100%;
+        background-color: red;
+        border-radius: 20px;
+        transition: width 0.5s;
+      }
+      .bar:hover .bar_in {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <div class="bar_in"></div>
+    </div>
+  </body>
+</html>
