@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>京东价格框</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .price_wrapper {
+        height: 30px;
+        width: 160px;
+        line-height: 30px;
+        margin: 100px auto;
+        border: 1px solid red;
+        text-align: center;
+      }
+      .price_wrapper .price {
+        position: relative;
+        float: left;
+        height: 100%;
+        width: 90px;
+        background-color: red;
+        color: #ffffff;
+        font-weight: 600;
+      }
+      .price_wrapper .price i {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 30px 10px 0 0;
+        border-color: transparent #fff rebeccapurple royalblue;
+      }
+      .asd {
+        width: 0;
+        height: 0;
+        border-color: pink #140303 rebeccapurple royalblue;
+        border-style: solid;
+        border-width: 30px;
+        margin-bottom: 50px;
+      }
+      .old_price {
+        font-size: 14px;
+        color: rgb(153, 153, 153);
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="price_wrapper">
+      <span class="price">$1650<i></i></span>
+      <span class="old_price">$1230</span>
+    </div>
+
+    <div class="asd"></div>
+    <i class="asd"></i>
+  </body>
+</html>

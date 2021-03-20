@@ -75,7 +75,7 @@ a {
   width: 51px;
   height: 42px;
   border: 0;
-  background: url("../../i/btn.png");
+  background: url("../../static/images/btn.png");
 }
 .user {
   float: right;
@@ -96,7 +96,7 @@ a {
 }
 .banner_center {
   height: 421px;
-  background: url("../../i/banner.png") no-repeat top center;
+  background: url("../../static/images/banner.png") no-repeat top center;
 }
 .banner_center .w > ul {
   width: 190px;

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- 哈哈哈哈哈哈哈看不见我 -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>伪元素字体图标</title>
     <style>
       @font-face {
         font-family: "iconfont";
@@ -15,7 +14,20 @@
           url("font/iconfont.ttf") format("truetype"),
           url("font/iconfont.svg#iconfont") format("svg");
       }
+
+      div {
+        width: 180px;
+        height: 30px;
+        border: 1px solid red;
+        margin: 100px auto;
+      }
+      div::after {
+        font-family: "iconfont";
+        content: "\ecc6";
+      }
     </style>
   </head>
-  <body></body>
+  <body>
+    <div></div>
+  </body>
 </html>
