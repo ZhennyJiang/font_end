@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>小米图标过渡</title>
+    <style>
+      @font-face {
+        font-family: "iconfont";
+        src: url("font/iconfont.eot");
+        src: url("font/iconfont.eot?#iefix") format("embedded-opentype"),
+          url("font/iconfont.woff2") format("woff2"),
+          url("font/iconfont.woff") format("woff"),
+          url("font/iconfont.ttf") format("truetype"),
+          url("font/iconfont.svg#iconfont") format("svg");
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .icon_wrapper {
+        position: relative;
+        margin: 100px auto;
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .icon1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 200px;
+        background: rgb(255, 103, 0) url("../static/images/mi-logo.png")
+          no-repeat center;
+        transition: left 0.2s ease-out;
+      }
+
+      .icon2 {
+        position: absolute;
+        top: 0;
+        right: -200px;
+        width: 200px;
+        height: 200px;
+        background: rgb(255, 103, 0) url("../static/images/mi-home.png")
+          no-repeat center;
+        transition: right 0.2s ease-out;
+      }
+      .icon_wrapper:hover .icon2 {
+        right: 0;
+      }
+      .icon_wrapper:hover .icon1 {
+        left: -200px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="icon_wrapper">
+      <div class="icon1"></div>
+      <div class="icon2"></div>
+    </div>
+  </body>
+</html>
