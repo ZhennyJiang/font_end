@@ -24,45 +24,43 @@
       .icon_wrapper {
         position: relative;
         margin: 100px auto;
-        width: 200px;
-        height: 200px;
+        width: 55px;
+        height: 55px;
         overflow: hidden;
       }
 
-      .icon1 {
+      .mi-logo {
         position: absolute;
         top: 0;
         left: 0;
-        width: 200px;
-        height: 200px;
-        background: rgb(255, 103, 0) url("mi-logo.png")
-          no-repeat center;
+        width: 55px;
+        height: 55px;
+        background: rgb(255, 103, 0) url("mi-logo.png") no-repeat center;
         transition: left 0.15s;
       }
 
-      .icon2 {
+      .mi-home {
         position: absolute;
         top: 0;
-        right: -200px;
-        width: 200px;
-        height: 200px;
-        background: rgb(255, 103, 0) url("mi-home.png")
-          no-repeat center;
+        right: -55px;
+        width: 55px;
+        height: 55px;
+        background: rgb(255, 103, 0) url("mi-home.png") no-repeat center;
         transition: right 0.15s;
       }
-      .icon_wrapper:hover .icon2 {
+      .icon_wrapper:hover .mi-home {
         right: 0;
       }
-      .icon_wrapper:hover .icon1 {
-        left: -200px;
+      .icon_wrapper:hover .mi-logo {
+        left: -55px;
       }
     </style>
   </head>
 
   <body>
     <div class="icon_wrapper">
-      <div class="icon1"></div>
-      <div class="icon2"></div>
+      <div class="mi-logo"></div>
+      <div class="mi-home"></div>
     </div>
   </body>
 </html>

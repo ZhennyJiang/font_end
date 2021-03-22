@@ -6,19 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      .qwe > span,
-      p {
-        color: aqua;
+      .qwe {
+        position: relative;
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        background-color: antiquewhite;
+        overflow: hidden;
+      }
+      .qwe div {
+        position: absolute;
+        top: 0;
+        left: 20px;
+        width: 210px;
+        height: 110px;
+        background-color: aqua;
+        overflow: hidden;
       }
     </style>
   </head>
   <body>
     <div class="qwe">
-      <div>
-        <p>123</p>
-      </div>
-      <p>456</p>
-      <span>789</span>
+      <div></div>
     </div>
   </body>
 </html>
