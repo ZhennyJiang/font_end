@@ -13,6 +13,13 @@
       "unicode_decimal": 58886
     },
     {
+      "icon_id": "338376",
+      "name": "充值",
+      "font_class": "chongzhi",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
       "icon_id": "507708",
       "name": "群蜂方向键 - 右",
       "font_class": "qunfengfangxiangjianyou",
@@ -62,11 +69,25 @@
       "unicode_decimal": 58970
     },
     {
+      "icon_id": "4165951",
+      "name": "钱",
+      "font_class": "qian",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
       "icon_id": "4485645",
       "name": "个人",
       "font_class": "geren",
       "unicode": "e52a",
       "unicode_decimal": 58666
+    },
+    {
+      "icon_id": "4602245",
+      "name": "额度转换",
+      "font_class": "eduzhuanhuan",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
     },
     {
       "icon_id": "5524658",
@@ -83,11 +104,39 @@
       "unicode_decimal": 58913
     },
     {
+      "icon_id": "6367275",
+      "name": "F",
+      "font_class": "F",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
       "icon_id": "6556877",
       "name": "微博",
       "font_class": "weibo",
-      "unicode": "e618",
-      "unicode_decimal": 58904
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "8361756",
+      "name": "大楼",
+      "font_class": "dalou",
+      "unicode": "e6bc",
+      "unicode_decimal": 59068
+    },
+    {
+      "icon_id": "11177805",
+      "name": "播放",
+      "font_class": "ziyuan",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "11394831",
+      "name": "clock",
+      "font_class": "clock",
+      "unicode": "e656",
+      "unicode_decimal": 58966
     },
     {
       "icon_id": "12225066",
@@ -114,8 +163,8 @@
       "icon_id": "14966524",
       "name": "7天退换货",
       "font_class": "7tiantuihuanhuo",
-      "unicode": "e61f",
-      "unicode_decimal": 58911
+      "unicode": "e620",
+      "unicode_decimal": 58912
     },
     {
       "icon_id": "15167670",
@@ -123,6 +172,13 @@
       "font_class": "right_5",
       "unicode": "e65c",
       "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "15695373",
+      "name": "内存卡",
+      "font_class": "neicunka",
+      "unicode": "e6ca",
+      "unicode_decimal": 59082
     },
     {
       "icon_id": "15784817",
