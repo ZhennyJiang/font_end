@@ -416,13 +416,13 @@ button {
 .goods_wrapper {
   background-color: rgb(245, 245, 245);
 }
+
 .goods_name {
   font-weight: 400;
   font-size: 14px;
   color: #212121;
   text-overflow: ellipsis;
   overflow: hidden;
-  margin: 1.5px 0;
 }
 .goods_detail {
   color: #b0b0b0;
@@ -432,7 +432,16 @@ button {
   font-size: 12px;
   text-overflow: ellipsis;
   overflow: hidden;
-  margin-bottom: 12px;
+  white-space: nowrap;
+  padding: 0 30px;
+}
+.goods_head {
+  float: left;
+  font-style: normal;
+  line-height: 63px;
+  font-weight: 200;
+  font-size: 22px;
+  color: #333;
 }
 .now_price {
   color: rgb(255, 103, 0);
@@ -451,14 +460,14 @@ button {
 .miao-sha_head {
   height: 63px;
 }
-.miao-sha_head > h3 {
+/* .miao-sha_head > h3 {
   float: left;
   font-style: normal;
   line-height: 63px;
   font-weight: 200;
   font-size: 22px;
   color: #333;
-}
+} */
 
 .miao-sha_icon {
   font-family: "iconfont";
@@ -532,16 +541,18 @@ button {
   text-align: center;
   padding-top: 17px;
 }
+
 .miao-sha_goods > li > a > img {
   width: 160px;
   height: 160px;
   margin: 22px 0;
 }
-
-.goods_container {
-  border: 1px solid red;
+.miao-sha_goods_name {
+  margin: 1.5px 0;
 }
-
+.miao-sha_goods_detail {
+  margin-bottom: 12px;
+}
 .goods_banner {
   height: 120px;
   background-color: rgb(10, 83, 59);
@@ -550,15 +561,216 @@ button {
 .goods_banner > img {
   width: 100%;
   height: 100%;
+  cursor: pointer;
 }
 .goods_header {
   height: 58px;
-  background-color: blueviolet;
 }
-.goods {
+.goods_header > span {
+  cursor: pointer;
+  float: right;
+  font-size: 16px;
+  color: #333;
+  line-height: 58px;
+  transition: color 0.3s;
+}
+.goods_header > span::after {
+  font-family: "iconfont";
+  content: "\e765";
+  color: rgb(176, 176, 176);
+  padding-left: 10px;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+.goods_header > span:hover,
+.goods_header span:hover::after {
+  color: rgb(255, 103, 0);
+}
+
+/* .phone_goods_wrapper {
   height: 614px;
   background-color: burlywood;
   margin-bottom: 36px;
+} */
+.goods {
+  height: 614px;
+  margin-bottom: 36px;
+  clear: both;
+}
+
+.goods_left {
+  float: left;
+  width: 234px;
+  height: 100%;
+}
+.goods_left > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.goods_left > a > img {
+  width: 234px;
+  height: 100%;
+}
+.goods_right {
+  float: left;
+  height: 100%;
+  width: 992px;
+  text-align: center;
+}
+.goods_right > li {
+  float: left;
+  height: 300px;
+  margin: 0 0 14px 14px;
+}
+
+.goods_right > li > a {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  padding: 20px 0;
+  width: 234px;
+  height: 300px;
+  background-color: #fff;
+  transition: top 0.5s, box-shadow 0.5s;
+}
+.goods_right > li > a:hover {
+  top: -2px;
+  box-shadow: 5px 5px 20px 5px rgb(224, 224, 224);
+}
+
+.img_wrapper {
+  margin-bottom: 18px;
+}
+.img_wrapper > img {
+  width: 160px;
+  height: 160px;
+}
+.phone_goods_name {
+  margin-bottom: 4px;
+}
+.phone_goods_detail {
+  margin-bottom: 10px;
+}
+.goods_left > li {
+  width: 234px;
+  height: 300px;
+  margin-bottom: 14px;
+}
+.goods_left > li > a {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: top 0.5s, box-shadow 0.5s;
+}
+.goods_left > li > a:hover {
+  top: -2px;
+  box-shadow: 5px 5px 20px 5px rgb(224, 224, 224);
+}
+.ele {
+  width: 234px;
+  height: 100%;
+}
+.ele li:first-child {
+  margin-bottom: 14px;
+}
+.ele > li > a {
+  position: relative;
+  display: block;
+  width: 234px;
+  height: 143px;
+  background-color: #fff;
+  transition: top 0.5s, box-shadow 0.5s;
+}
+.ele > li > a:hover {
+  top: -2px;
+  box-shadow: 5px 5px 20px 5px rgb(224, 224, 224);
+}
+
+.ele > li > a > div {
+  width: 50%;
+  height: 143px;
+  padding: 44px 0 0 30px;
+  text-align: left;
+}
+.ele > li > a > div > h3 {
+  margin-bottom: 5px;
+}
+.more h3 {
+  font-size: 18px;
+}
+.ele li > a > i {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -24px;
+  margin-right: 35px;
+  width: 50px;
+  height: 50px;
+}
+.ele li > a > i::after {
+  font-family: "iconfont";
+  content: "\e62b";
+  color: rgb(255, 103, 0);
+  font-size: 56px;
+}
+.more p {
+  color: #757575;
+  font-size: 12px;
+}
+.ele_img {
+  position: absolute;
+  top: 32px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+}
+.video_box {
+  clear: both;
+}
+.video_box > li {
+  float: left;
+  width: 296px;
+  height: 285px;
+  margin-left: 14px;
+  background-color: #fff;
+  margin-bottom: 14px;
+}
+.video_box li:first-child {
+  margin-left: 0;
+}
+.video_box > li > a {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.video_box > li > a > img {
+  width: 100%;
+  height: 180px;
+  margin-bottom: 28px;
+}
+.video_box > li > a > h3 {
+  margin-bottom: 6px;
+}
+.video_box > li > a > i {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  width: 37px;
+  height: 23px;
+  line-height: 15px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+}
+.video_box > li > a > i::after {
+  font-family: "iconfont";
+  content: "\e633";
+  color: #fff;
+  font-size: 2px;
 }
 
 .site_footer {
