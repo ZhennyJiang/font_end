@@ -661,6 +661,8 @@ button {
 .goods_left > li > a {
   position: relative;
   display: block;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   transition: top 0.5s, box-shadow 0.5s;
@@ -679,6 +681,8 @@ button {
 .ele > li > a {
   position: relative;
   display: block;
+  top: 0;
+  left: 0;
   width: 234px;
   height: 143px;
   background-color: #fff;
@@ -731,6 +735,7 @@ button {
   clear: both;
 }
 .video_box > li {
+  position: relative;
   float: left;
   width: 296px;
   height: 285px;
@@ -744,9 +749,16 @@ button {
 .video_box > li > a {
   position: relative;
   display: block;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   text-align: center;
+  transition: top 0.5s, box-shadow 0.5s;
+}
+.video_box > li > a:hover {
+  top: -5px;
+  box-shadow: 5px 5px 20px 5px rgb(224, 224, 224);
 }
 .video_box > li > a > img {
   width: 100%;
@@ -762,22 +774,169 @@ button {
   left: 20px;
   width: 37px;
   height: 23px;
-  line-height: 15px;
   border: 2px solid #fff;
   border-radius: 10px;
 }
 .video_box > li > a > i::after {
+  display: block;
   font-family: "iconfont";
   content: "\e633";
   color: #fff;
   font-size: 2px;
+  line-height: 19px;
+}
+.video_box > li > a:hover i {
+  background-color: rgb(255, 103, 0);
+  border-color: rgb(255, 103, 0);
 }
 
 .site_footer {
   height: 332px;
-  background-color: black;
+  background-color: #fff;
+}
+.site_footer-service {
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid rgb(224, 224, 224);
+  text-align: center;
+  padding: 27px 5.5px;
+}
+.site_footer-service > li {
+  float: left;
+  width: 243px;
+  height: 28px;
+  border-right: 1px solid rgb(224, 224, 224);
+  text-align: center;
+  line-height: 28px;
+}
+.site_footer-service li:last-child {
+  border: none;
+}
+.site_footer-service > li > a {
+  color: #616161;
+  font-size: 16px;
+}
+.site_footer-service > li > a:hover {
+  color: rgb(255, 103, 0);
 }
 
+.site_service_icon {
+  font-family: "iconfont";
+  font-size: 24px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.site_service_icon1::after {
+  content: "\e629";
+  font-size: 22px;
+}
+.site_service_icon2::after {
+  content: "\e620";
+}
+.site_service_icon3::after {
+  content: "\e606";
+  font-size: 28px;
+  font-weight: 100;
+}
+.site_service_icon4::after {
+  content: "\e65a";
+  font-size: 22px;
+}
+.site_service_icon5::after {
+  content: "\e616";
+  font-size: 28px;
+}
+.links {
+  float: left;
+  margin: 40px 0;
+}
+.links > dl {
+  width: 160px;
+  float: left;
+}
+.links > dl > dt {
+  margin-bottom: 26px;
+}
+.links > dl > dt {
+  color: #424242;
+  font-size: 14px;
+}
+
+.links > dl > dd {
+  margin-top: 10px;
+}
+.links > dl > dd > a {
+  color: #757575;
+  font-size: 12px;
+}
+.links > dl > dd > a:hover {
+  color: rgb(255, 103, 0);
+}
+.communication {
+  float: left;
+  margin: 40px 0;
+  width: 251px;
+  height: 111px;
+  border-left: 1px solid rgb(224, 224, 224);
+  text-align: center;
+  color: #616161;
+  font-size: 12px;
+  font-family: "iconfont";
+}
+.communication > p {
+  margin-bottom: 5px;
+}
+.communication > .phone {
+  font-size: 22px;
+  color: rgb(255, 103, 0);
+}
+.communication > a {
+  display: inline-block;
+  width: 120px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid rgb(255, 103, 0);
+  color: rgb(255, 103, 0);
+}
+.communication > a:hover {
+  background-color: rgb(255, 103, 0);
+  color: #fff;
+}
+.communication > a > em::after {
+  content: "\e504";
+  font-size: 14px;
+  margin-right: 8px;
+}
+.communication > div {
+  margin-top: 10px;
+}
+.communication > div > a {
+  color: rgb(71, 71, 71);
+  vertical-align: middle;
+  margin-left: 6px;
+}
+.communication > div > a:hover {
+  color: rgb(255, 103, 0);
+}
+.communication > div > a:first-child {
+  font-size: 24px;
+}
+.communication > div > a:nth-child(2) {
+  font-size: 17px;
+  position: relative;
+}
+.wx_img {
+  width: 126px;
+  height: 126px;
+  position: absolute;
+  top: 20px;
+  right: -43px;
+  display: none;
+}
+.communication > div > a:hover .wx_img {
+  display: block;
+}
 .site_info {
   background-color: rgb(245, 245, 245);
   height: 266px;
@@ -785,10 +944,37 @@ button {
 
 .fixed_menu {
   position: fixed;
-  background-color: rgb(90, 65, 65);
-  top: 308px;
+  top: 30%;
   right: 0;
   width: 80px;
-  height: 455px;
   border: 1px solid rgb(245, 245, 245);
+  z-index: 99;
+  text-align: center;
+  clear: both;
+}
+.fixed_menu > ul > li {
+  border-left: 1px solid rgb(245, 245, 245);
+  border-bottom: 1px solid rgb(245, 245, 245);
+}
+.fixed_menu > ul > li > a {
+  display: block;
+  width: 82px;
+  height: 89px;
+  color: #757575;
+  background-color: #fff;
+  overflow: hidden;
+}
+.fixed_menu > ul > li > a:hover {
+  color: rgb(255, 103, 0);
+}
+.fixed_menu em {
+  display: block;
+  font-family: "iconfont";
+  margin: 18px 0 8px 0;
+  font-size: 30px;
+}
+.fixed_menu h4 {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
 }
