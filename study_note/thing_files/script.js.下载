@@ -1,0 +1,105 @@
+headerFix()
+
+logoResize()//logo尺寸
+
+/*回到顶部*/
+$(window).scroll(function(){
+        //获取窗口的滚动条的垂直位置
+        var s = $(window).scrollTop();
+        //当窗口的滚动条的垂直位置大于页面的最小高度时，让返回顶部元素渐现，否则渐隐
+        if( s > 400){
+            $(".goTop").fadeIn(100);
+        }else{
+            $(".goTop").fadeOut(200);
+        };
+    });
+$('.goTop').click(function(){
+
+	$('body,html').stop().animate({scrollTop:0});
+
+	return false;
+
+});
+function headerFix(){
+	var iWSon = document.documentElement.clientWidth;
+	if(iWSon > 998){
+		var $windowHeight = $(window).height();
+		var bodyHeight = $(document.body).height()
+	  	var $headerHeight = $('.header').height()*2;
+	    $(window).scroll(function(){
+	      var scrollTop = $(window).scrollTop();
+	      if(scrollTop >= 136 && bodyHeight > $windowHeight+$headerHeight){
+	      	$('.header').addClass('current');
+	      	$('.logo .logo_bg').slideDown(300);
+	      	if($('.header').hasClass('current')){
+	      		$('.headerFix-menu').fadeIn(300);
+	      		$('.header.current .header1_w').slideUp(300);
+	      		$('.logo').find('.logo1').attr({width:50,height:50})
+                        $('.logo').css("top","5px");
+                        $('.logo2').css("display","none"); 
+                        $('.logo2').css("margin-top","-29px");
+                        $('.nav_w').css("height","60px");
+                        $('.nav_w').css("line-height","60px");
+                        $('.nav_w').css("box-shadow","0px 5px 9.7px 0.3px rgba(0, 0, 0, 0.2)");
+                        $('.top').css("height","60px");
+                        $('.top').css("line-height","60px");
+                        $('.nav').css("height","60px");
+                        $('.nav').css("line-height","60px");
+                        $('.nav .sub').css("top","49px");
+
+	      	}
+	      }else{
+	      	$('.header').removeClass('current');
+	      	$('.logo .logo_bg').slideUp(300);
+	      	if($('.header').hasClass('current')){
+	      		$('.headerFix-menu').fadeIn(300);
+	      	}else{
+	      		$('.headerFix-menu,.headerFix-close').fadeOut(300);
+	      		$('.header .header1_w').slideDown(300)
+	      		$('.logo').find('.logo1').attr({width:120,height:120})
+                        $('.logo').css("top","10px");
+                        $('.logo2').css("display","block");
+                        $('.nav_w').css("background","#fff");
+                        $('.nav_w').css("height","96px");
+                        $('.nav_w').css("line-height","96px");
+                        $('.nav_w').css("box-shadow","none");
+                        $('.top').css("height","96px");
+                        $('.top').css("line-height","96px");
+                        $('.nav').css("height","96px");
+                        $('.nav').css("line-height","96px");
+                        $('.nav .sub').css("top","67px");
+	      	}
+	      }
+	      
+	    })
+	}
+	$('.headerFix-menu').click(function(){
+		$('.header.current .header1_w').slideDown(300)
+		$(this).fadeOut(100);
+		$('.headerFix-close').fadeIn(300)
+
+	})
+	$('.headerFix-close').click(function(){
+		$(this).fadeOut(300)
+		$('.header.current .header1_w').slideUp(300);
+		$('.headerFix-menu').fadeIn(300)
+	})
+}
+
+
+
+function logoResize(){
+    var sWSon = document.documentElement.clientWidth;
+     if(sWSon<=1400){
+        $('.logo').find('img').attr({width:32,height:32})
+    }else{
+    	$('.logo').find('.logo1').attr({width:120,height:120})
+    }
+
+    
+}
+
+
+$(window).resize(function(){
+	logoResize()
+})

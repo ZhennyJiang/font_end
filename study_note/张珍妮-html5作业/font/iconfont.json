@@ -1,0 +1,72 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1440897",
+      "name": "老访客",
+      "font_class": "laofangke",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "2019094",
+      "name": "学生",
+      "font_class": "xuesheng",
+      "unicode": "e7c0",
+      "unicode_decimal": 59328
+    },
+    {
+      "icon_id": "2455954",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "6342046",
+      "name": "校友系统",
+      "font_class": "xiaoyouxitong",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "6629890",
+      "name": "右 右",
+      "font_class": "youyou-",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "7089920",
+      "name": "vpn网关",
+      "font_class": "vpnwangguan",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
+      "icon_id": "7258111",
+      "name": "考生管理",
+      "font_class": "kaoshengguanli",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "8156489",
+      "name": "教师",
+      "font_class": "jiaoshi",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "12097694",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e67d",
+      "unicode_decimal": 59005
+    }
+  ]
+}

@@ -365,7 +365,6 @@ button {
 .service_icon1::after {
   font-size: 24px;
   font-family: "iconfont";
-  content: "\e656";
 }
 .service_icon2::after {
   font-size: 24px;

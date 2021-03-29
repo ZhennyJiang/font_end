@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flex2</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .w {
+        width: 1226px;
+        margin: 0 auto;
+      }
+      .top_nav {
+        display: flex;
+
+        justify-content: space-between;
+        height: 100px;
+      }
+      .left {
+        width: 800px;
+        background-color: antiquewhite;
+        display: flex;
+      }
+      .right {
+        display: flex;
+        width: 200px;
+        background-color: aqua;
+        justify-content: space-between;
+      }
+      .right span:first-child {
+        width: 120px;
+        background-color: blueviolet;
+      }
+      .right span:last-child {
+        width: 70px;
+        background-color: blue;
+      }
+      .left > div {
+        flex: 1;
+        background-color: darkkhaki;
+        margin-right: 2px;
+        border: 1px solid salmon;
+        /* flex-wrap: wrap; */
+      }
+      .left > div > span {
+        display: block;
+        width: 60px;
+        height: 40px;
+        background-color: rgb(133, 104, 104);
+        border: 1px solid aqua;
+      }
+      .left span:last-child {
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top_nav w">
+      <div class="left">
+        <div>
+          <span>111</span>
+        </div>
+        <div><span>111111111111111111111111111</span> </div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+      </div>
+      <div class="right">
+        <span></span>
+        <span>购物车</span>
+      </div>
+    </div>
+    <!-- <span>111</span> -->
+    <div
+      style="
+        width: 100px;
+        height: 50px;
+        background-color: antiquewhite;
+        display: flex;
+      "
+    >
+      <span style="flex: 1; background-color: rgb(151, 151, 151)">1222222222223</span>
+      <span style="flex: 1; background-color: aquamarine">321<span>
+    </div>
+  </body>
+</html>
