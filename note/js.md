@@ -467,6 +467,86 @@ for重复执行某段代码，通常跟计数有关。
     while(条件表达式)
     //执行一次之后，判断是否满足条件，满足条件则继续执行
 ```
+#### continue break
+
+continue关键字用于立即跳出本次循环，继续下一次循环
+例子：有5个包子，第三个有虫子，扔掉第三个，吃下一个包子
+
+break关键字用于立即退出整个循环，循环结束
+例子：有5个包子，第三个有虫子，剩下的包子都不吃了
+
+
+### 数组
+
+数组就是存储在一个变量下的一组数据的集合。
+
+JS中创建数组有两种方式：
++ 利用new创建数组
+
+var 数组名 = new Array();
+例：
+```javascript
+    var arr = new Array(); // 传建一个空的数组
+```
++ 利用数组字面量创建数组
+
+var 数组名 = []; 
+
+[]里面可以存放任意类型的数据。
+
+数组的索引（下标）从0开始。
+
+例：
+```javascript
+    var arr = ['a','b',1,true]; // 传建带初始值的数组
+    console.log(arr[0]); // a
+    console.log(arr[3]); // true
+    console.log(arr[4]); // undefined
+```
+
+#### 新增数组元素
+
+1. 通过修改length长度新增数组元素
+
+```javascript
+    var arr = [1,2,3,4,5,6]; // 传建带初始值的数组
+    arr.length = 8;
+    console.log(arr[8]); //undefined 
+```
+
+2. 修改索引号
+```javascript
+    var arr = [1,2,3,4,5,6]; // 传建带初始值的数组
+    arr[arr.length] = 9;
+    console.log(arr.length-1); //9
+
+    arr= 'hhh';
+    console.log(arr)  //hhh
+```
+<strong>不要直接给数组的变量直接赋值，否则数组里面的元素会全都消失</strong>
+
+### 函数
+
+函数就是封装了一段可以被重复执行调用的代码块。减少代码的冗余
+
+函数的使用：声明函数、调用函数
+
+```javascript
+    function 函数名(){
+        //函数体
+    }
+```
++ function声明函数的关键字，该全部小写
++ 函数是做某件事，所以函数名一般是动词
++ 函数需要调用才能执行，调用方式：函数名（参数1，参数2）;
+```javascript
+    function sayHi(){   //声明函数
+        alert('hi~');
+    }
+
+    sayHi(); //调用函数
+```
+
 
 
 
