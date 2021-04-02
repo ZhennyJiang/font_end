@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>学生成绩案例</title>
+    <script>
+      var num = prompt("请输入您的学生班级人数：");
+      console.log(typeof num);
+      var sum = 0;
+      for (var i = 1; i <= num; i++) {
+        sum += prompt("请输入学生" + i + "的成绩") * 1;
+      }
+      alert("您的班级学生总成绩是：" + sum);
+      alert("您的班级学生平均分是：" + sum / num);
+    </script>
+  </head>
+  <body></body>
+</html>
