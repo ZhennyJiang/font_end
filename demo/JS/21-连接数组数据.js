@@ -5,3 +5,5 @@ for (var i = 0; i < arr.length; i++) {
   str += arr[i] + stp;
 }
 console.log(str);
+
+console.log(arr.reverse());
