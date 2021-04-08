@@ -158,7 +158,7 @@ button {
   left: 0;
   width: 55px;
   height: 55px;
-  background: rgb(255, 103, 0) url("../小米图标过渡/mi-logo.png") no-repeat
+  background: rgb(255, 103, 0) url("../css/小米图标过渡/mi-logo.png") no-repeat
     center;
   transition: left 0.15s;
 }
@@ -169,7 +169,7 @@ button {
   right: -55px;
   width: 55px;
   height: 55px;
-  background: rgb(255, 103, 0) url("../小米图标过渡/mi-home.png") no-repeat
+  background: rgb(255, 103, 0) url("../css/小米图标过渡/mi-home.png") no-repeat
     center;
   transition: right 0.15s;
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>for循环案例</title>
+    <script>
+      // 1 求1-100的和的平均值
+      var sum1 = 0,
+        average = 0;
+      for (var i = 1; i <= 100; i++) {
+        sum1 += i;
+      }
+      average = sum1 / 100;
+      console.log("1-100的和的平均值是:" + average);
+
+      //2 求1-100之间的偶数和以及奇数和
+      var evenSum = 0,
+        oddSum = 0;
+      for (var i = 1; i <= 100; i++) {
+        if (i % 2 == 0) {
+          evenSum += i;
+        } else {
+          oddSum += i;
+        }
+      }
+      console.log("1-100的偶数和是:" + evenSum);
+      console.log("1-100的奇数和是:" + oddSum);
+
+      //3 求1-100之间能够被3整除的和
+
+      var threeSum = 0;
+      for (var i = 0; i <= 100; i++) {
+        if (i % 3 == 0) {
+          threeSum += i;
+        }
+      }
+      console.log("1-100之间能够被3整除的和是:" + threeSum);
+    </script>
+  </head>
+  <body></body>
+</html>
