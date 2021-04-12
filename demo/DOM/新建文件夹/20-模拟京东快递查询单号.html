@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>京东查询单号</title>
+    <style>
+      input {
+        width: 150px;
+        height: 15px;
+        font-size: 12px;
+        margin-top: 25px;
+        /* position: absolute;
+        top: 10px;
+        left: 0; */
+      }
+      .search {
+        position: relative;
+      }
+      .content {
+        top: -3px;
+        left: 0;
+        width: 150px;
+        height: 20px;
+        box-shadow: 0.5px 1.5px 5px 0.5px #999;
+        margin-bottom: 10px;
+        font-size: 16px;
+        display: none;
+        position: absolute;
+      }
+      .content::before {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        top: 20px;
+        left: 18px;
+        border: 8px solid #333;
+        border-style: solid dashed dashed;
+        border-color: white transparent transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="search">
+      <div class="content"></div>
+      <input type="text" />
+    </div>
+    <script>
+      var content = document.querySelector(".content");
+      var input = document.querySelector("input");
+      console.log(content);
+
+      input.addEventListener("keyup", function () {
+        if (input.value != "") {
+          content.style.display = "block";
+          content.innerHTML = input.value;
+        }
+      });
+      input.addEventListener("blur", function () {
+        content.style.display = "none";
+      });
+      input.addEventListener("focus", function () {
+        if (input.value != "") content.style.display = "block";
+      });
+    </script>
+  </body>
+</html>

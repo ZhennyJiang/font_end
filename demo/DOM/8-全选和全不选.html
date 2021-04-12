@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>全选和全不选</title>
+  </head>
+  <body>
+    <table border="1">
+      <input type="checkbox" id="all" />
+      <tbody>
+        <tr>
+          <td>
+            <input type="checkbox" name="item" />
+          </td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" name="item" />
+          </td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" name="item" />
+          </td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" name="item" />
+          </td>
+          <td>1</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      var all = document.querySelector("#all");
+      var inputs = document.querySelector("tbody").querySelectorAll("input");
+      all.onclick = function () {
+        for (var i = 0; i < inputs.length; i++) {
+          inputs[i].checked = this.checked;
+        }
+      };
+
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].onclick = function () {
+          var flag = true;
+          for (var i = 0; i < inputs.length; i++) {
+            if (!inputs[i].checked) {
+              flag = false;
+            }
+          }
+          all.checked = flag;
+        };
+      }
+    </script>
+  </body>
+</html>

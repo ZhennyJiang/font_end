@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件冒泡</title>
+    <style>
+      .father {
+        width: 120px;
+        height: 120px;
+        background-color: rgb(185, 158, 121);
+        margin: 100px auto;
+      }
+      .son {
+        width: 100px;
+        height: 100px;
+        background-color: antiquewhite;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="father">
+      <div class="son"></div>
+    </div>
+    <script>
+      var son = document.querySelector(".son");
+      var father = document.querySelector(".father");
+
+      son.addEventListener("click", function (e) {
+        console.log(e.target);
+        console.log(this);
+        e.stopPropagation();
+        alert("son");
+      });
+      father.addEventListener("click", function (e) {
+        console.log(e.target);
+        console.log(this);
+        alert("father");
+      });
+    </script>
+  </body>
+</html>

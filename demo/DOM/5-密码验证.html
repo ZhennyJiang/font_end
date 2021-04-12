@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>密码验证</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .pas_wrapper {
+        width: 480px;
+        margin: 100px auto;
+        text-align: center;
+      }
+      .message {
+        display: inline-block;
+        font-size: 12px;
+        color: #999;
+        background: url("../../static/images/info.png") no-repeat left center;
+        vertical-align: middle;
+        padding-left: 17px;
+      }
+      .password {
+        display: inline-block;
+      }
+      .wrong {
+        background-image: url("../../static/images/wrong-fill.png");
+        color: red;
+      }
+      .right {
+        background-image: url("../../static/images/correct.png");
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pas_wrapper">
+      <input type="password" class="password" value="" />
+      <p class="message">请输入6-12位密码</p>
+    </div>
+
+    <script>
+      var password = document.querySelector(".password");
+      var message = document.querySelector(".message");
+
+      password.onblur = function () {
+        if (password.value.length < 6 || password.value.length > 12) {
+          message.className = "message wrong";
+          message.innerHTML = "请输入6-12位密码！";
+        } else {
+          message.className = "message right";
+          message.innerHTML = "ok";
+        }
+      };
+    </script>
+  </body>
+</html>

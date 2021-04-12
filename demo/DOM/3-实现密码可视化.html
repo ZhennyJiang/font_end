@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>密码可视化</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      .password_wrapper {
+        width: 300px;
+        height: 30px;
+        margin: 100px auto;
+        border-bottom: 1px solid rgb(206, 206, 206);
+        clear: both;
+      }
+      #password {
+        clear: both;
+        border: 0;
+        outline: none;
+        width: 265px;
+        height: 100%;
+      }
+      img {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="password_wrapper">
+      <input type="password" id="password" />
+      <img src="../../static/images/eye-close.png" alt="" id="img" />
+    </div>
+    <script>
+      var password = document.getElementById("password");
+      var img = document.getElementById("img");
+      var flag = false;
+      img.onclick = function () {
+        if (!flag) {
+          img.src = "../../static/images/eye.png";
+          password.type = "text";
+          flag = true;
+        } else {
+          img.src = "../../static/images/eye-close.png";
+          password.type = "password";
+          flag = false;
+        }
+      };
+    </script>
+  </body>
+</html>

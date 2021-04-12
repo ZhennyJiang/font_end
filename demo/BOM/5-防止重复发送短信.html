@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>防止重发发送短信</title>
+    <script>
+      window.onload = function () {
+        var input = document.querySelector("input");
+        var button = document.querySelector("button");
+        var seconds = 10;
+        button.onclick = function () {
+          this.disabled = true;
+          button.innerHTML = "请" + seconds + "秒后再发送信息";
+          var timer1 = setInterval(() => {
+            if (seconds > 1) {
+              seconds--;
+              //由于定时器的调用者是window，因此这里的button不能改为this
+              button.innerHTML = "请" + seconds + "秒后再发送信息";
+              seconds = 10;
+            } else {
+              button.disabled = false;
+              button.innerHTML = "发送";
+              clearInterval(timer1);
+            }
+          }, 1000);
+        };
+      };
+    </script>
+  </head>
+  <body>
+    手机号码： <input type="number" /><button>发送</button>
+  </body>
+</html>

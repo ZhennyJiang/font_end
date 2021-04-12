@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>发布留言</title>
+    <style>
+      textarea {
+        width: 200px;
+        height: 120px;
+        border: 1px solid pink;
+        resize: none;
+        outline: none;
+      }
+      ul > li {
+        width: 150px;
+      }
+      ul a {
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <button>发布</button>
+
+    <ul></ul>
+
+    <script>
+      var textarea = document.querySelector("textarea");
+      var publish = document.querySelector("button");
+      var ul = document.querySelector("ul");
+      publish.onclick = function () {
+        console.log(textarea.value);
+        if (textarea.value == "") {
+          alert("您留言的内容为空");
+        } else {
+          var content = document.createElement("li");
+          content.innerHTML =
+            textarea.value + '<a href="javascript:;">删除</a>';
+          ul.insertBefore(content, ul.children[0]);
+          //   ul.appendChild(content);
+          textarea.value = "";
+          var as = document.querySelectorAll("a");
+          for (var i = 0; i < as.length; i++) {
+            as[i].onclick = function () {
+              ul.removeChild(this.parentNode);
+            };
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

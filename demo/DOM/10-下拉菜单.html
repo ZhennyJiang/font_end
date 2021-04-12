@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>下拉菜单</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      ul {
+        list-style: none;
+      }
+      a {
+        color: #333;
+        text-decoration: none;
+      }
+      .nav {
+        display: flex;
+        list-style: none;
+        width: 200px;
+        margin: 100px auto;
+        justify-content: space-between;
+      }
+      .nav > li {
+        flex: 1;
+      }
+      .nav_header {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 5px 0;
+        background-color: antiquewhite;
+        border: 1px solid saddlebrown;
+      }
+      .nav_item {
+        display: none;
+        width: 100%;
+      }
+      .nav_item > li {
+        width: 100%;
+        border: 1px solid rgb(138, 77, 34);
+      }
+      .nav_item > li > a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 5px 0;
+        background-color: rgb(236, 224, 208);
+
+        margin-top: -1px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="nav">
+      <li>
+        <a href="#" class="nav_header">微博</a>
+        <ul class="nav_item">
+          <li><a href="#">1</a></li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">1</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" class="nav_header">评论</a>
+        <ul class="nav_item">
+          <li><a href="#">2</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">2</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" class="nav_header">私信</a>
+        <ul class="nav_item">
+          <li><a href="#">3</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">3</a></li>
+        </ul>
+      </li>
+    </ul>
+    <script>
+      var nav = document.querySelector("nav");
+      var lis = document.querySelectorAll("li");
+      var as = document.querySelectorAll(".nav_header");
+      var nav_item = document.querySelectorAll(".nav_item");
+      for (var i = 0; i < lis.length; i++) {
+        lis[i].onmouseover = function () {
+          this.children[1].style.display = "block";
+        };
+        lis[i].onmouseout = function () {
+          this.children[1].style.display = "none";
+        };
+      }
+      as[1].style.marginLeft = "-1px";
+      as[2].style.marginLeft = "-2px";
+      nav_item[1].style.marginLeft = "-1px";
+      nav_item[2].style.marginLeft = "-2px";
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cat</title>
+    <style>
+      img {
+        width: 200px;
+        height: 200px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="cat1">cat1</button>
+    <button id="cat2">cat2</button>
+    <button id="cat3">cat3</button>
+    <button id="cat4">cat4</button>
+    <div>
+      <img src="../../static/images/cat1.png" alt="" />
+    </div>
+    <script>
+      var cat1 = document.querySelector("#cat1");
+      var cat2 = document.querySelector("#cat2");
+      var cat3 = document.querySelector("#cat3");
+      var cat4 = document.querySelector("#cat4");
+      var img = document.querySelector("img");
+      cat1.onclick = function () {
+        img.src = "../../static/images/cat1.png";
+      };
+      cat2.onclick = function () {
+        img.src = "../../static/images/cat2.png";
+      };
+      cat3.onclick = function () {
+        img.src = "../../static/images/cat3.png";
+      };
+      cat4.onclick = function () {
+        img.src = "../../static/images/cat4.png";
+      };
+    </script>
+  </body>
+</html>

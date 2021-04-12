@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>仿京东输入框</title>
+  </head>
+  <body>
+    <input type="text" name="" id="search" value="手机" />
+    <script>
+      var search = document.getElementById("search");
+      search.style.color = "#999";
+      search.onfocus = function () {
+        if (this.value === "手机") {
+          this.value = "";
+        }
+        this.style.color = "#333";
+      };
+      search.onblur = function () {
+        if (this.value === "") {
+          this.value = "手机";
+          this.style.color = "#999";
+        }
+      };
+    </script>
+  </body>
+</html>
