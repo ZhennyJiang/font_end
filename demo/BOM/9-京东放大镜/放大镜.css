@@ -1,0 +1,47 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.goods_wrapper {
+  display: flex;
+  margin: 100px auto;
+  padding: 0 20px;
+}
+.goods_show {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  border: 2px solid rgb(245, 245, 245);
+  z-index: 99;
+}
+.mask {
+  position: absolute;
+  background-color: #fece4f;
+  opacity: 0.5;
+  width: 304px;
+  height: 304px;
+  top: 0;
+  left: 0;
+  cursor: move;
+  display: none;
+}
+.message {
+  flex: 1;
+  margin-left: 10px;
+  border: 2px solid rgb(245, 245, 245);
+}
+.big {
+  position: absolute;
+  width: 540px;
+  height: 540px;
+  top: 0;
+  left: 453px;
+  z-index: 98;
+  overflow: hidden;
+  border: 2px solid rgb(245, 245, 245);
+}
+.bigImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

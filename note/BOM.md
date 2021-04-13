@@ -122,3 +122,153 @@ JavaScript 语言的一大特点就是单线程，也就是说，同一个时间
 1. 先执行执行栈中的同步任务。
 2. 异步任务（回调函数)放入任务队列中。
 3. 一旦执行栈中的所有同步任务执行完毕，系统就会按次序读取任务队列中的异步任务，于是被读取的异步任务结束等待状态，进入执行栈，开始执行。
+
+### location 对象
+
+window 对象给我们提供了一个 location 属性用于获取或设置窗体的 URL，并且可以用于解析 URL。因为这个属性返回的是一个对象，所以我们将这个属性也称为 location 对象。
+
+#### URL
+
+统一资源定位符(Uniform Resource Locator,URL)是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的 URL，它包含的信息指出文件的位置以及浏览器应该怎么处理它。
+
+URL 的一般语法格式为︰
+
+<div style="background-color: rgb(228, 240, 255);padding:10px;margin-bottom:10px;">
+protocol: / /host [ :port]/path/ [ ?query]#fragment
+http: / / www.itcast.cn/index.html ?name=andy&age=18#link
+</div>
+
+![](img/BOM/URL.jpg)
+
+#### location 对象属性
+
+![](img/BOM/location对象属性.png)
+
+#### location 对象方法
+
+![](img/BOM/location对象方法.png)
+
+### navigator
+
+navigator 对象包含有关浏览器的信息，它有很多属性，我们最常用的是 userAgent，该属性可以返回由客户机发送服务器的 user-agent 头部的值。
+
+下面前端代码可以判断用户那个终端打开页面，实现跳转
+
+<div style="background-color: rgb(228, 240, 255);padding:10px;margin-bottom:10px;">
+if ((navigator.userAgent.match (/(phone|pad|pod|iPhone|iPod| ios|iPad |Android|Mobile|BlackBerry| IEMobile |MQQBrowser| JUC| Fennec / wOSBrowser|BrowserNG| WebOS| Symbian | windows Phone)/i) ) ) {
+
+window . location.href = "";
+//手机
+
+}else {
+
+window . location.href = "";
+//电脑
+
+}
+
+</div>
+
+### history 对象
+
+![](img/BOM/history对象.png)
+
+### 元素偏移量 offset
+
+offset 概述：
+offset 翻译过来就是偏移量，我们使用 offset 系列相关属性可以动态的得到该元素的位置(偏移)、大小等。
+
+- 获得元素距离带有定位父元素的位置
+- 获得元素自身的大小(宽度高度)
+- 注意:返回的数值都不带单位
+
+  offset 系列常用属性
+  ![](img/BOM/offset.png)
+
+### offset 与 style 区别
+
+offset：
+
+- offset 可以得到任意样式表中的样式值
+- offset 系列获得的数值是没有单位的
+- offsetWidth 包含 padding+border+width·
+- offsetWidth 等属性是只读属性，只能获取不能赋值·
+
+所以，我们想要获取元素大小位置，用 offset 更合适
+
+style：
+
+- style 只能得到行内样式表中的样式值
+- style.width 获得的是带有单位的字符串
+- style.width 获得不包含 padding 和 border 的值
+- style.width 是可读写属性，可以获取也可以赋值
+
+所以，我们想要给元素更改值，则需要用 style 改变·
+
+### 元素可视区 client 系列
+
+client 翻译过来就是客户端，我们使用 client 系列的相关属性来获取元素可视区的相关信息。通过 client 系列的相关属性可以动态的得到该元素的边框大小、元素大小等。
+
+![](img/BOM/client.jpg)
+
+### 立即执行函数
+
+1. 立即执行函数：不需要另外调用，立马能够自己执行的函数.
+
+2. 写法：
+
+```javascript
+// 1
+(function [函数名](形参1, 形参2) {
+  函数体;
+})(实参1, 实参2);
+// 2
+(function [函数名](形参1, 形参2) {})(实参1, 实参2);
+```
+
+3. 立即执行函数最大得作用就是独立创建一个作用域，里面的所有变量都是局部变量，不会有命名冲突的现象
+
+### 元素 scroll 系列属性
+
+![](img/BOM/scroll.png)
+
+scrollTop 是用于在盒子中的元素的，页面的被卷去的头部是用 pageYOffset
+
+![](img/BOM/scroll.jpg)
+
+offsetWidth clientWidth scrollWidth 对比
+![](img/BOM/assumptions.jpg)
+
+他们主要用法︰
+
+1. offset 系列经常用于获得元素位置 offsetLeft offsetTop
+2. client 经常用于获取元素大小 clientWidth clientHeight
+3. scroll 经常用于获取滚动距离 scrollTop scrollLeft
+
+### mouseenter 和 mouseover 的区别
+
+mouseenter 鼠标事件
+当鼠标移动到元素上时就会触发 mouseenter 事件类似 mouseover，它们两者之间的差别是：
+
+mouseover 鼠标经过自身盒子会触发，经过子盒子还会触发。mouseenter 只会经过自身盒子触发。之所以这样，是因为 mouseenter 不会冒泡
+
+### 动画实现原理
+
+核心原理 ∶ 通过定时器 setInterval()不断移动盒子位置。
+
+实现步骤︰
+
+1. 获得盒子当前位置
+2. 让盒子在当前位置加上 1 个移动距离
+3. 利用定时器不断重复这个操作
+4. 加一个结束定时器的条件
+5. 注意此元素需要添加定位，才能使用 element.style.left
+
+### 缓动动画效果原理
+
+缓动动画就是让元素运动速度有所变化，最常见的是让速度慢慢停下来
+
+思路:
+
+1. 让盒子每次移动的距离慢慢变小，速度就会慢慢落下来。
+2. 核心算法︰(目标值-现在的位置)/ 10 做为每次移动的距离步长 3.停止的条件是 ∶ 让当前盒子位置等于目标位置就停止定时器

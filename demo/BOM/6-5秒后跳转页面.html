@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5秒后跳转页面</title>
+    <script>
+      window.onload = function () {
+        var button = document.querySelector("button");
+        var div = document.querySelector("div");
+        var seconds = 5;
+        button.addEventListener("click", function () {
+          div.innerHTML = "还有" + seconds + "秒跳转页面";
+          seconds--;
+          var timer = setInterval(() => {
+            if (seconds == 0) {
+              location.href = "https://baidu.com";
+              clearInterval(timer);
+            } else {
+              div.innerHTML = "还有" + seconds + "秒跳转页面";
+              seconds--;
+            }
+          }, 1000);
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <button>click</button>
+    <div></div>
+  </body>
+</html>
