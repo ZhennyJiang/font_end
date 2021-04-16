@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>弹出动画</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .wrapper {
+        position: fixed;
+        right: 0;
+        top: 100px;
+      }
+      .big {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+      }
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0px;
+        width: 200px;
+        height: 100px;
+        line-height: 100px;
+        background-color: pink;
+        padding: 0 20px;
+        z-index: -1;
+      }
+    </style>
+    <script src="../animate.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="big">
+        <span>1</span>
+        <div class="slide">问题反馈</div>
+      </div>
+    </div>
+
+    <script>
+      var big = document.querySelector(".big");
+      var slide = document.querySelector(".slide");
+
+      big.addEventListener("mouseenter", function () {
+        animate(slide, -100);
+      });
+      big.addEventListener("mouseout", function () {
+        animate(slide, 0);
+      });
+    </script>
+  </body>
+</html>

@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>仿淘宝侧边栏</title>
     <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
       .w {
         width: 1220px;
         height: 1820px;
@@ -15,9 +19,17 @@
         position: absolute;
         top: 300px;
         right: 0;
-        width: 25px;
+        width: 50px;
         height: 100px;
         border: 2px solid rgb(197, 196, 196);
+        list-style: none;
+      }
+      ul > li {
+        padding: 6px 0;
+      }
+      .goBack {
+        font-size: 10px;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -25,13 +37,13 @@
     <div class="w"></div>
     <ul>
       <li>1</li>
+      <li class="goBack">返回顶部</li>
       <li class="a">2</li>
-      <li>3</li>
     </ul>
     <script>
       var ul = document.querySelector("ul");
-      var a = document.querySelector(".a");
-      a.style.display = "none";
+      var goBack = document.querySelector(".goBack");
+      goBack.style.display = "none";
       document.addEventListener("scroll", function () {
         if (window.pageYOffset >= 318) {
           ul.style.position = "fixed";
@@ -41,11 +53,36 @@
           ul.style.top = "300px";
         }
         if (window.pageYOffset > 600) {
-          a.style.display = "block";
+          goBack.style.display = "block";
         } else {
-          a.style.display = "none";
+          goBack.style.display = "none";
         }
       });
+      goBack.addEventListener("click", function () {
+        animate(window, 0);
+      });
+
+      function animate(obj, target, callback) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(() => {
+          if (window.pageYOffset == target) {
+            clearInterval(obj.timer);
+            // if (callback) {
+            //   callback();
+            // }相当于：
+            callback && callback();
+          } else {
+            obj.step = (target - window.pageYOffset) / 10;
+            if (obj.step >= 0) {
+              obj.step = Math.ceil(obj.step);
+            } else {
+              obj.step = Math.floor(obj.step);
+            }
+
+            window.scroll(0, window.pageYOffset + obj.step);
+          }
+        }, 15);
+      }
     </script>
   </body>
 </html>

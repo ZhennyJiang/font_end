@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动画函数封装</title>
+    <style>
+      div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+      }
+      .hh {
+        position: absolute;
+        top: 200px;
+        left: 0;
+        width: 120px;
+        height: 120px;
+        background-color: lightblue;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="hh_btn">click</button>
+    <div></div>
+    <span class="hh"> </span>
+    <script>
+      var div = document.querySelector("div");
+      var hh = document.querySelector(".hh");
+      var hh_btn = document.querySelector(".hh_btn");
+      hh_btn.addEventListener("click", function () {
+        animate(hh, 100);
+      });
+      animate(div, 200);
+
+      function animate(obj, target) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(() => {
+          if (obj.offsetLeft >= target) {
+            clearInterval(obj.timer);
+          } else {
+            obj.style.left = obj.offsetLeft + 1 + "px";
+          }
+          console.log(obj.offsetLeft);
+        }, 10);
+      }
+    </script>
+  </body>
+</html>

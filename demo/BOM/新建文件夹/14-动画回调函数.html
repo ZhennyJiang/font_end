@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>缓动动画效果原理</title>
+    <title>缓动动画函数调用</title>
     <style>
       div {
         position: absolute;
@@ -15,6 +15,7 @@
       }
     </style>
   </head>
+
   <body>
     <div></div>
     <button>500</button>
@@ -26,13 +27,18 @@
         animate(div, 500);
       });
       buttons[1].addEventListener("click", function () {
-        animate(div, 800);
+        animate(div, 800, function () {
+          div.style.backgroundColor = "red";
+        });
       });
-      function animate(obj, target) {
+      function animate(obj, target, callback) {
         clearInterval(obj.timer);
         obj.timer = setInterval(() => {
           if (obj.offsetLeft == target) {
             clearInterval(obj.timer);
+            if (callback) {
+              callback();
+            }
           } else {
             obj.step = (target - obj.offsetLeft) / 10;
             if (obj.step >= 0) {

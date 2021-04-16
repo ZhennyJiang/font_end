@@ -17,8 +17,16 @@
   <body>
     <div></div>
     <script>
-      var div = document.querySelector("div");
-      console.log(div.clientTop);
+      var obj = {
+        uname: "jenny",
+        age: 18,
+        belong: "beautiful",
+        sayHi: function () {
+          console.log("hi~");
+        },
+      };
+      obj.a = 1;
+      console.log(obj.a);
     </script>
   </body>
 </html>
