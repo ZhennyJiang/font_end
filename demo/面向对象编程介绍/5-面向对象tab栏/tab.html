@@ -36,6 +36,10 @@
         border-bottom: 1px solid rgb(189, 187, 187);
         cursor: pointer;
       }
+      .first_nav > ul > li input {
+        width: 80px;
+        height: 25px;
+      }
       .first_nav > ul > .li_active {
         border-bottom: 0;
       }
@@ -53,6 +57,7 @@
         border: 1px solid rgb(189, 187, 187);
         text-align: center;
         line-height: 20px;
+        cursor: pointer;
       }
       .tabs_con {
         padding-top: 10px;
@@ -64,6 +69,28 @@
       .tabs_con > .con_active {
         display: block;
       }
+      .icon-guanbi {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(252, 249, 249);
+        color: rgb(60, 64, 66);
+        width: 10px;
+        height: 12px;
+        top: 0;
+        right: 0;
+      }
+      .icon-guanbi::after {
+        display: block;
+        content: "x";
+        height: 12px;
+        font-size: 10px;
+        line-height: 10px;
+      }
+      .icon-guanbi:hover {
+        background-color: rgb(238, 238, 238);
+      }
     </style>
     <script src="tab.js"></script>
   </head>
@@ -74,14 +101,10 @@
         <nav class="first_nav">
           <ul>
             <li class="li_active">
-              <span>测试1</span><span class="iconfont icon-guanbi"> </span>
+              <span>测试1</span><span class="icon-guanbi"></span>
             </li>
-            <li>
-              <span>测试2</span><span class="iconfont icon-guanbi"> </span>
-            </li>
-            <li>
-              <span>测试3</span><span class="iconfont icon-guanbi"> </span>
-            </li>
+            <li><span>测试2</span><span class="icon-guanbi"></span></li>
+            <li><span>测试3</span><span class="icon-guanbi"></span></li>
           </ul>
           <div class="tab_add">
             <span>+</span>

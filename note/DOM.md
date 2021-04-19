@@ -422,8 +422,8 @@ function getNextElementSibling(element) {
 }
 ```
 
-#### 添加节点
-
+#### 节点的添加与删除
+1. createElement创建节点 element.appendChild最父元素尾部追加节点
 ```html
 <ul></ul>
 <script>
@@ -437,8 +437,28 @@ function getNextElementSibling(element) {
   ul.insertBeforeChild(li2, ul.children[0]);
 </script>
 ```
+2. element.insertAdjacentHTML(position,text);
+   position是相对元素的位置，并且是以下字符串之一：
+   + 'beforebegin' 元素自身的前面
+   + 'afterbegin' 插入元素内部的第一个节点之前
+   + 'beforeend' 插入元素内部的第一个节点之后
+   + 'afterend' 元素自身的后面
+```html
+<ul>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+<script>
+  var ul = document.querySelector("ul");
+  var li = '<li class="a">123</>'
+ ul.insertAdjacentHTML('beforeend',li);//这时ul的长度为4，多出一个<li class="a">123</>
+</script>
+```
 
-#### 删除节点 node.removeChild(child)
+
+text是要被解析的HTML或XML，并插入到DOM树中的字符串
+1. 删除节点 node.removeChild(child)
 
 ```html
 <ul>
