@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bind</title>
+  </head>
+  <body>
+    <button>click</button>
+    <button>click</button>
+    <button>click</button>
+    <script>
+      var obj = { name: "andy" };
+      function fn(a, b) {
+        console.log(this);
+
+        console.log(a + b);
+      }
+      var fun = fn.bind(obj, 1, 2);
+      fun();
+
+      var btns = document.querySelectorAll("button");
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].onclick = function () {
+          this.disabled = true;
+          setTimeout(
+            function () {
+              this.disabled = false;
+            }.bind(this),
+            3000
+          );
+        };
+      }
+    </script>
+  </body>
+</html>

@@ -9,6 +9,5 @@ class Son extends Father {
     console.log(super.say() + "的儿子");
   }
 }
-
+console.log(Father);
 var son = new Son();
-son.say();

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>trim</title>
+    <script>
+      window.addEventListener("load", function () {
+        var input = document.querySelector("input");
+        var button = document.querySelector("button");
+
+        button.addEventListener("click", function () {
+          var str = input.value.trim();
+          if (str === "") {
+            alert("请重新输入内容.");
+          } else {
+            alert(str);
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <input type="text" /> <button>click</button>
+  </body>
+</html>

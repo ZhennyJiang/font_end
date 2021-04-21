@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>forEach 渲染数据</title>
+    <script>
+      window.onload = function () {
+        var data = [
+          { id: 01, pname: "华为", price: 11009 },
+          { id: 02, pname: "小米", price: 2999 },
+          { id: 03, pname: "苹果", price: 6999 },
+          { id: 04, pname: "华为", price: 9909 },
+        ];
+
+        var tbody = document.querySelector("tbody");
+        var start = document.querySelector(".start");
+        var end = document.querySelector(".end");
+        var search_price = document.querySelector(".search-price");
+        var product = document.querySelector(".product");
+        var search_product = document.querySelector(".search_product");
+        getData(data);
+        search_price.addEventListener("click", function () {
+          var newData = data.filter(function (value) {
+            return value.price >= start.value && value.price <= end.value;
+          });
+          getData(newData);
+        });
+
+        search_product.addEventListener("click", function () {
+          var arr = [];
+          data.some(function (value) {
+            if (value.pname === product.value) {
+              arr.push(value);
+              return true;
+            }
+          });
+          getData(arr);
+        });
+        function getData(myData) {
+          tbody.innerHTML = "";
+          myData.forEach(function (value) {
+            var tr = document.createElement("tr");
+            tr.innerHTML =
+              "<td>" +
+              value.id +
+              "</td><td>" +
+              value.pname +
+              "</td><td>" +
+              value.price +
+              "</td>";
+            tbody.appendChild(tr);
+          });
+        }
+      };
+    </script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      table {
+        border-collapse: collapse;
+        width: 400px;
+        margin: 15px auto;
+        text-align: center;
+      }
+      tr,
+      th,
+      td {
+        border: 1px solid rgb(150, 137, 128);
+      }
+      .search {
+        text-align: center;
+        margin-top: 50px;
+      }
+      input[type="text"] {
+        width: 50px;
+        margin: 0 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="search">
+      按照价格查询：<input type="text" class="start" /> -
+      <input type="text" class="end" />
+      <input type="button" value="搜索" class="search-price" />
+      按照商品名称查询：
+      <input type="text" class="product" />
+      <input type="button" value="查询" class="search_product" />
+    </div>
+    <table cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>产品名称</th>
+          <th>价格</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </body>
+</html>
