@@ -17,8 +17,58 @@
   <body>
     <div></div>
     <script>
-      var arr = [1, 2, 5, 6, 9];
-      console.log(arr.sort());
+      // var x = 10;
+      // function fn() {
+      //   console.log(x);
+      // }
+      // function show(f) {
+      //   var x = 30;
+      //   f();
+      // }
+      // show()
+      // var a = 6;
+      // setTimeout(() => {
+      //   console.log(0);
+      //   alert(a);
+      //   a = 666;
+      // }, 1000);
+      // console.log(1);
+      // a = 66;
+      var obj = {
+        name: "jenny",
+        age: 18,
+        // setName: function () {
+        //   this.name = "angle";
+        // },
+      };
+      setTimeout(
+        function () {
+          console.log(this);
+        }.bind(obj),
+        1000
+      );
+
+      // var obj2 = {};
+      // obj2 = Object.defineProperties(obj, {
+      //   sex: {
+      //     get: function () {
+      //       //当获取扩展的属性值的时候 get自动调用
+      //       //设置值
+      //       console.log("get");
+
+      //       return "男";
+      //     },
+      //     set: function (value) {
+      //       //当修改扩展的属性值的时候 set自动调用
+      //       //修改值
+      //       console.log(value, "set");
+      //     },
+      //   },
+      // });
+      // console.log(obj2);
+
+      // obj2.sex = "女"; //当有这个设置的时候set就会自动接收值并设置值
+      // console.log(obj2.sex);
     </script>
   </body>
 </html>

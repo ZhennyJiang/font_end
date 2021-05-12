@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>02_常见的闭包</title>
+  </head>
+  <body>
+    <!--
+1. 将函数作为另一个函数的返回值
+2. 将函数作为实参传递给另一个函数调用
+-->
+
+    <script type="text/javascript">
+      // function fun(time) {
+      //   setTimeout(() => {
+      //     console.log(1);
+      //   }, time);
+      // }
+      // fun(500);
+
+      (function myModule(window) {
+        var str = "abe";
+        var num = 123;
+        function do1() {
+          console.log(str);
+        }
+        function do2() {
+          console.log(num);
+        }
+        window.myModule = {
+          do1: do1,
+        };
+      })(window);
+    </script>
+  </body>
+</html>

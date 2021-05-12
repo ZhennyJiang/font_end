@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>07_面试题1</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /*
+   说说它们的输出情况
+   */
+
+      //代码片段一
+      var name = "aaaa";
+      function Person(name) {
+        this.name = name;
+        this.sayHi = function () {
+          return function () {
+            console.log(this.name);
+          };
+        };
+      }
+      var x = new Person("xiaoming");
+      x.sayHi()(); //属于函数自调用，this指向window
+
+      var name = "The Window";
+
+      var object = {
+        name: "My Object",
+        getNameFunc: function () {
+          return function () {
+            return this.name;
+          };
+        },
+      };
+      console.log(object.getNameFunc()()); //?
+
+      // 代码片段二;
+      var name2 = "The Window";
+      var object2 = {
+        name2: "My Object",
+        getNameFunc: function () {
+          var that = this; //缓存this，保证后续的this指向不会发生改变
+          return function () {
+            return that.name2;
+          };
+        },
+      };
+      console.log(object2.getNameFunc()()); //?
+    </script>
+  </body>
+</html>

@@ -1,0 +1,200 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url("../font3/iconfont.ttf?t=1620796057934") format("truetype");
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+a {
+  text-decoration: none;
+}
+em,
+i {
+  font-style: normal;
+}
+/* 去掉li 的小圆点 */
+li {
+  list-style: none;
+}
+
+img {
+  /* border 0 照顾低版本浏览器 如果 图片外面包含了链接会有边框的问题 */
+  border: 0;
+  /* 取消图片底侧有空白缝隙的问题 */
+  vertical-align: middle;
+}
+
+button {
+  /* 当我们鼠标经过button 按钮的时候，鼠标变成小手 */
+  cursor: pointer;
+}
+.fixed_picture {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 937px;
+}
+.fixed_picture > img {
+  width: 100%;
+  height: 100%;
+}
+.wrapper {
+  height: 900px;
+}
+.login_wrapper {
+  margin-left: 375px;
+  height: 500px;
+  padding: 20px;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  line-height: 40px;
+  height: 40px;
+}
+.top > div {
+  display: flex;
+}
+.top > div > h3 {
+  font-size: 24px;
+  font-weight: 510;
+  color: #333;
+  margin-left: 10px;
+}
+.top > ul {
+  display: flex;
+  font-size: 14px;
+  color: #838383;
+  margin-right: 10px;
+}
+.top > ul > li > a {
+  display: block;
+  color: #838383;
+  margin: 0 10px;
+}
+
+.mi-logo {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(255, 103, 0);
+  border-radius: 35%;
+  background-color: rgb(255, 103, 0);
+}
+.login {
+  position: relative;
+  width: 450px;
+  height: 600px;
+  background-color: #fff;
+  box-shadow: 1px 1px 20px 5px #e7e7e7;
+  margin: 80px auto;
+  padding: 53px 45px;
+}
+.login > div > span > a {
+  font-size: 22px;
+  color: #333;
+  font-weight: 600;
+  width: 44px;
+  height: 30px;
+}
+.login > div {
+  display: flex;
+}
+.login > div span:first-child {
+  margin-right: 20px;
+}
+.hengxian {
+  width: 44px;
+  height: 4px;
+  border-radius: 10px;
+  background-color: rgb(255, 92, 0);
+  margin-bottom: 10px;
+}
+.grey_words {
+  color: #bbb !important;
+}
+input {
+  width: 100%;
+  height: 60px;
+  background-color: rgb(249, 249, 249);
+  margin-top: 20px;
+  outline: none;
+  border: 0;
+  font-size: 17px;
+  padding-left: 20px;
+}
+::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: rgba(0, 0, 0, 0.4);
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: rgba(0, 0, 0, 0.4);
+}
+:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+#eye {
+  position: absolute;
+  top: 212px;
+  right: 60px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+.login-btn {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  background-color: #ff5c00;
+  outline: none;
+  border: 0;
+  margin-top: 20px;
+
+  font-size: 16px;
+  border-radius: 5px;
+}
+.login-btn > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+}
+.login-btn:hover {
+  background-color: rgb(255, 126, 41);
+}
+.other {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  color: #ff5c00;
+  cursor: pointer;
+}
+.login > p {
+  margin-top: 113px;
+  text-align: center;
+  color: #aaa;
+}
+.icons {
+  display: flex;
+  font-family: "iconfont";
+  margin: 0 auto;
+  justify-content: center;
+  margin-top: 15px;
+  font-size: 40px;
+  width: 221px;
+  justify-content: space-between;
+}

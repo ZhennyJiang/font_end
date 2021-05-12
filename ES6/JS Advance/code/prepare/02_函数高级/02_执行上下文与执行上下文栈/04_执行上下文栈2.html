@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>04_执行上下文栈2</title>
+  </head>
+  <body>
+    <!--
+1. 依次输出什么?
+2. 整个过程中产生了几个执行上下文?
+-->
+    <script type="text/javascript">
+      // console.log("global begin: " + i);
+      // var i = 1;
+      // foo(1);
+      // function foo(i) {
+      //   if (i == 4) {
+      //     return;
+      //   }
+      //   console.log("foo() begin:" + i);
+      //   foo(i + 1);
+      //   console.log("foo() end:" + i);
+      // }
+      // console.log("global end: " + i);
+      function Person(uname) {
+        this.uname = uname;
+      }
+      Person.prototype.test1 = function () {
+        console.log(123);
+      };
+      console.log(Person.test1()); //报错，显示原型链是供其实例对象使用的。而这里的Person.test1()中的
+      //Person是作为Object的实例对象，找方法或属性只能通过__proto__去找
+      var per = new Person("xiaoming");
+      console.log(per);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>0</button>
+    <button>1</button>
+    <button>2</button>
+    <script>
+      // function fn() {
+      //   console.log(this);
+      // }
+      // new fn();
+      // let fn1 = new fn();
+      // fn();
+
+      // function Person(name, age) {
+      //   this.name = name;
+      //   this.age = age;
+      // }
+      // Person.prototype.sayHi = function () {
+      //   console.log("hi~");
+      // };
+      // console.log(Person.prototype);
+
+      // var person1 = new Person();
+      // console.log(person1);
+      // var a = "aaa";
+      // function fun() {
+      //   a = "ccc";
+      // }
+      // fun();
+      // console.log(c); //报错
+      // var obj = {};
+      // console.log(obj.test); //undefined
+      // obj.test(); //报错
+      var btns = document.querySelectorAll("button");
+      for (let i = 0; i < btns.length; i++) {
+        btns[i].onclick = function () {
+          alert(i);
+        };
+      }
+    </script>
+  </body>
+</html>

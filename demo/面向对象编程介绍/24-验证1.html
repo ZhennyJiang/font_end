@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>表单验证</title>
+    <style>
+      img {
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" placeholder="请输入用户名" />
+    <img alt="" />
+    <script>
+      var input = document.querySelector("input");
+      var img = document.querySelector("img");
+      var reg = /^[a-zA-Z0-9_-]{3,6}$/;
+
+      input.onblur = function () {
+        console.log(reg);
+        if (reg.test(input.value)) {
+          img.src = "../../static/images/correct.png";
+        } else {
+          img.src = "../../static/images/wrong-fill.png";
+        }
+      };
+    </script>
+  </body>
+</html>

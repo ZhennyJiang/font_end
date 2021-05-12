@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>表单验证</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .loginWrapper {
+        width: 1690px;
+        height: 820px;
+        margin: 30px auto;
+        border: 2px solid rgb(221, 220, 220);
+        padding-top: 50px;
+        text-align: right;
+      }
+      label {
+        display: inline-block;
+        font-size: 18px;
+        color: rgb(139, 139, 139);
+        line-height: 50px;
+        margin-top: 30px;
+      }
+      input {
+        width: 337px;
+        height: 50px;
+        border: 2px solid rgb(221, 220, 220);
+        margin-top: 30px;
+      }
+      table {
+        margin: 0 auto;
+      }
+
+      td {
+        position: relative;
+      }
+
+      td > span {
+        position: absolute;
+        text-align: left;
+        top: 50%;
+        left: 350px;
+        margin-left: -6px;
+        padding-left: 20px;
+        width: 200px;
+      }
+
+      .correct {
+        color: rgb(12, 170, 12);
+        background: url("../../static/images/correct.png") no-repeat center left;
+      }
+
+      .wrong {
+        color: red;
+        background: url("../../static/images/wrong-fill.png") no-repeat center
+          left;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="loginWrapper">
+      <form action="#">
+        <table>
+          <tbody>
+            <tr>
+              <td><label for="">手机号：</label></td>
+              <td><input type="text" id="phone" /><span></span></td>
+            </tr>
+            <tr>
+              <td><label for="">QQ：</label></td>
+              <td><input type="text" id="QQ" /><span></span></td>
+            </tr>
+            <tr>
+              <td><label for="">昵称：</label></td>
+              <td><input type="text" id="nickName" /><span></span></td>
+            </tr>
+            <tr>
+              <td><label for="">短信验证码：</label></td>
+              <td><input type="text" id="verificationCode" /><span></span></td>
+            </tr>
+            <tr>
+              <td><label for="">登录密码：</label></td>
+              <td><input type="text" id="loginPassword" /><span></span></td>
+            </tr>
+            <tr>
+              <td><label for="">确认密码：</label></td>
+              <td>
+                <input type="text" id="verificationPassword" /><span></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <script>
+      var phoneReg = /^1[3|5|7|8][0-9]{9}$/;
+      var qqReg = /^[0-9]{6,}$/;
+      var nickNameReg = /^[\u4e00-\u9fa5]{2,5}$/;
+      var verificationCodeReg = /^[0-9]{5}$/;
+      var loginPasswordReg = /^[0-9a-zA-Z_-]{6,15}$/;
+
+      var phone = document.querySelector("#phone");
+      var qq = document.querySelector("#QQ");
+      var nickName = document.querySelector("#nickName");
+      var verificationCode = document.querySelector("#verificationCode");
+      var loginPassword = document.querySelector("#loginPassword");
+      var verificationPassword = document.querySelector(
+        "#verificationPassword"
+      );
+      reg(phone, phoneReg);
+      reg(qq, qqReg);
+      reg(nickName, nickNameReg);
+      reg(verificationCode, verificationCodeReg);
+      reg(loginPassword, loginPasswordReg);
+      function reg(ele, reg) {
+        ele.onblur = function () {
+          if (reg.test(ele.value)) {
+            this.nextElementSibling.className = "correct";
+            this.nextElementSibling.innerHTML = "输入正确";
+          } else {
+            this.nextElementSibling.className = "wrong";
+            this.nextElementSibling.innerHTML = "输入格式错误";
+          }
+        };
+      }
+      verificationPassword.onblur = function () {
+        console.log(verificationCode.value);
+
+        if (verificationPassword.value == loginPassword.value) {
+          this.nextElementSibling.className = "correct";
+          this.nextElementSibling.innerHTML = "输入正确";
+        } else {
+          this.nextElementSibling.className = "wrong";
+          this.nextElementSibling.innerHTML = "两次密码输入不一致";
+        }
+      };
+    </script>
+  </body>
+</html>

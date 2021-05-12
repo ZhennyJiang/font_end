@@ -1,0 +1,72 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1799760",
+      "name": "维修",
+      "font_class": "weixiu",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "2849723",
+      "name": "优惠",
+      "font_class": "youhui",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "5120175",
+      "name": "手机",
+      "font_class": "phone",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "9005395",
+      "name": "恢复默认设置",
+      "font_class": "huifumorenshezhi",
+      "unicode": "e693",
+      "unicode_decimal": 59027
+    },
+    {
+      "icon_id": "11758219",
+      "name": "回收",
+      "font_class": "huishou",
+      "unicode": "e74f",
+      "unicode_decimal": 59215
+    },
+    {
+      "icon_id": "11903708",
+      "name": "help",
+      "font_class": "help",
+      "unicode": "e65b",
+      "unicode_decimal": 58971
+    },
+    {
+      "icon_id": "12659686",
+      "name": "更换类型",
+      "font_class": "genghuanleixing",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "13394576",
+      "name": "飞机",
+      "font_class": "weibiaoti--",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "16562805",
+      "name": "维修",
+      "font_class": "weixiu1",
+      "unicode": "e6e3",
+      "unicode_decimal": 59107
+    }
+  ]
+}
