@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户切换登录</title>
+    <script src="../vue.js"></script>
+    <script>
+      window.onload = function () {
+        const app = new Vue({
+          el: "#app",
+          data: {
+            isUser: true,
+            message: "555",
+          },
+          methods: {},
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 当我们在input已经输入了内容后再切换类型的话，原本的内容不会删除,
+      这是因为Vue在进行DOM渲染时，处于性能考虑，会尽可能的复用已经存在的元素，
+      而不是重新创建新的元素师，可以给相应的input添加key，使它们的key不同
+      -->
+      <span v-if="isUser">
+        <label for="username">用户账户</label>
+        <input
+          type="text"
+          id="username"
+          placeholder="用户账户"
+          key="username"
+        />
+      </span>
+      <span v-else>
+        <label for="email ">用户邮箱</label>
+        <input type="text" id="email" placeholder="用户邮箱" key="email" />
+      </span>
+      <button @click="isUser = !isUser">切换状态</button>
+    </div>
+  </body>
+</html>

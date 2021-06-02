@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script>
+      window.onload = function () {
+        //1.创建组件构造器对象，子组件
+        const cpn = {
+          template: `#cpn`,
+          // props: ["cmovies", "cmessage"],
+          data() {
+            return {
+              counter: 0,
+            };
+          },
+          methods: {
+            increment() {
+              this.counter++;
+              this.$emit("counterchang", this.counter);
+            },
+            decrement() {
+              this.counter--;
+              this.$emit("counterchang", this.counter);
+            },
+          },
+        };
+        //父组件
+        const app = new Vue({
+          el: "#app",
+          data: {
+            movies: ["a", "b", "c"],
+            message: "message",
+            counter: 0,
+          },
+          methods: {
+            cpnClick(counter) {
+              console.log(counter);
+              this.counter = counter;
+              return counter;
+            },
+          },
+          components: {
+            cpn,
+          },
+        });
+      };
+    </script>
+  </head>
+
+  <body>
+    <!-- 子组件模板 -->
+    <template id="cpn">
+      <div>
+        <button @click="decrement">-</button>
+        <button @click="increment">+</button>
+      </div>
+    </template>
+    <!-- 父组件模板 -->
+    <div id="app">
+      <!-- 3. 使用自定义事件 -->
+      <cpn @counterchang="cpnClick"></cpn>
+      <h3>当前的点击次数是：{{counter}}</h3>
+    </div>
+  </body>
+</html>

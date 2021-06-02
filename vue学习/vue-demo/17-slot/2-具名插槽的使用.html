@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script>
+      window.onload = function () {
+        const cpn = {
+          template: "#cpn",
+        };
+
+        new Vue({
+          el: "#app",
+          data: {},
+          components: {
+            cpn,
+          },
+        });
+      };
+    </script>
+  </head>
+
+  <body>
+    <template id="cpn">
+      <div>
+        <slot name="first"><span>第一个</span></slot>
+        <slot name="second"><span>第二个</span></slot>
+        <input type="text" />
+        <slot name="last"><span>最后一个</span></slot>
+      </div>
+    </template>
+    <div id="app">
+      <cpn><button slot="second">我变成button了</button></cpn>
+    </div>
+  </body>
+</html>

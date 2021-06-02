@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //浅拷贝
+      //   var arr1 = ["a", 1, { name: "jenny" }];
+      //   var arr2 = arr1.concat();
+      //   arr2[0] = "b";
+      //   arr2[2].name = "tom";
+      //   console.log(arr1, arr2); //["a", 1, 3]   ["b", 1, 3]
+
+      //   var o = {
+      //     id: 1,
+      //     name: "汽车",
+      //     product: {
+      //       id: 2,
+      //       name: "冰箱",
+      //     },
+      //   };
+
+      //   var obj = {};
+      //   Object.assign(obj, o); //将o浅拷贝给obj
+      //   obj.product.id = 5;
+      //   console.log(o, obj);
+      console.log("-------------------------------------------------------");
+      var o = {
+        id: 1,
+        name: "汽车",
+        product: {
+          id: 2,
+          name: "冰箱",
+        },
+      };
+
+      //   var obj = {};
+      //   function deepCopy(newObj, targetObj) {
+      //     for (var k in targetObj) {
+      //       if (targetObj[k] instanceof Array) {
+      //         //由于数组也属于对象，因此要先把数组的判断放在前面
+      //         newObj[k] = [];
+      //         deepCopy(newObj[k], targetObj[k]);
+      //       } else if (targetObj[k] instanceof Object) {
+      //         newObj[k] = {};
+      //         deepCopy(newObj[k], targetObj[k]);
+      //       } else {
+      //         newObj[k] = targetObj[k];
+      //       }
+      //     }
+      //   }
+      //   deepCopy(obj, o);
+      //   console.log(obj);
+      function cloneUtil(target) {
+        let result;
+        if (getType(target) == "Object") {
+          result = {};
+        } else if (getType(target) == "Array") {
+          result = [];
+        } else {
+          return result;
+        }
+        for (let i in target) {
+          if (getType(target[i]) == "Object" || getType(target[i]) == "Array") {
+            result[i] = cloneUtil(target[i]);
+          } else {
+            result[i] = target[i];
+          }
+        }
+        return result;
+      }
+      function getType(target) {
+        return Object.prototype.toString.call(target).slice(8, -1);
+      }
+      let obj = cloneUtil(o);
+      o.id = 5;
+      obj.id = 8;
+      console.log(o, obj);
+    </script>
+  </body>
+</html>

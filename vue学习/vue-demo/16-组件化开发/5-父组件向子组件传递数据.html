@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script>
+      window.onload = function () {
+        //1.创建并注册组件构造器对象
+        const cpn = {
+          template: `#cpn`,
+          // props: ["cmovies", "cmessage"],
+          props: {
+            cMovies: {
+              //类型是对象或者数组 默认值必须从一个工厂函数获取
+              type: Array,
+              default() {
+                return [];
+              },
+            },
+            cmessage: {
+              type: String,
+              default: "hhhh",
+            },
+          },
+          data() {
+            return {};
+          },
+        };
+
+        const app = new Vue({
+          el: "#app",
+          data: {
+            movies: ["a", "b", "c"],
+            message: "message",
+          },
+          components: {
+            cpn1: {
+              template: `#cpn1`,
+            },
+            cpn,
+          },
+        });
+      };
+    </script>
+  </head>
+
+  <body>
+    <template id="cpn1">
+      <div>
+        <h2>cpn1</h2>
+      </div>
+    </template>
+
+    <template id="cpn">
+      <div>
+        <h2>cpn</h2>
+        <h3>{{cMovies}}</h3>
+      </div>
+    </template>
+
+    <div id="app">
+      <!-- 3. 使用组件 -->
+      <cpn v-bind:c-movies="movies" :cmessage="message"></cpn>
+      <cpn1></cpn1>
+    </div>
+  </body>
+</html>

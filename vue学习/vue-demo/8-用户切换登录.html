@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户切换登录</title>
+    <script src="../vue.js"></script>
+    <script>
+      window.onload = function () {
+        const app = new Vue({
+          el: "#app",
+          data: {
+            isUser: true,
+            message: "555",
+          },
+          methods: {},
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <span v-if="isUser">
+        <label for="username">用户账户</label>
+        <input type="text" id="username" placeholder="用户账户" />
+      </span>
+      <span v-else>
+        <label for="useremail ">用户邮箱</label>
+        <input type="text" id="useremail" placeholder="用户邮箱" />
+      </span>
+      <button @click="isUser = !isUser">切换状态</button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var arr = [1, 1, 2, 2, 3, 3];
+      let set = new Set(arr);
+      var arr2 = [];
+      for (const i of set) {
+        arr2.push(i);
+      }
+      console.log(...set);
+
+      function uniqueArr(arr) {
+        return [...new Set(arr)];
+      }
+      //   let uniqueArr = (arr) => [...new Set(arr)];
+      //   console.log(uniqueArr(arr));
+    </script>
+  </body>
+</html>

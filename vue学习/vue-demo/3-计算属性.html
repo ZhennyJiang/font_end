@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <script>
+      window.onload = function () {
+        const app = new Vue({
+          el: "#app",
+          data: {
+            firstName: "Zhang",
+            lastName: "Jenny",
+            books: [
+              { id: 000, name: "book1", price: 88 },
+              { id: 001, name: "book2", price: 56 },
+              { id: 002, name: "book3", price: 40 },
+              { id: 003, name: "book4", price: 80 },
+            ],
+          },
+          computed: {
+            fullName: function () {
+              return this.firstName + "  " + this.lastName;
+            },
+            totalPrice: function () {
+              let totalPrice = 0;
+              this.books.forEach(function (item, index) {
+                totalPrice += item.price;
+              });
+              return totalPrice;
+            },
+          },
+          methods: {
+            getFullName: function () {
+              return this.firstName + "  " + this.lastName;
+            },
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{getFullName()}}</p>
+      <p>{{fullName}}</p>
+      <p>{{totalPrice}}</p>
+    </div>
+  </body>
+</html>

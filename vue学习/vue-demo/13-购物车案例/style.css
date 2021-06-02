@@ -1,0 +1,14 @@
+th,
+td {
+  height: 40px;
+  padding: 0 10px;
+  text-align: center;
+  border: 1px solid grey;
+}
+th {
+  background-color: rgb(212, 212, 212);
+}
+table {
+  border: 1px solid grey;
+  border-collapse: collapse;
+}

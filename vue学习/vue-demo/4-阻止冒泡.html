@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <script>
+      window.onload = function () {
+        new Vue({
+          el: "#app",
+          data: {},
+          methods: {
+            add(a, event) {
+              console.log(a, event);
+            },
+            external() {
+              console.log("external");
+            },
+            submitClick() {},
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <div @click="externalClick">
+        <button @click.stop="add('add',$event)">+</button>
+      </div>
+      <form action="baidu">
+        <input type="submit" @click.prevent="submitClick" />
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script type="text/x-template" id="cpn1">
+      <div>
+        <h2>cpn1</h2>
+        <h3>{{title}}</h3>
+      </div>
+    </script>
+
+    <script>
+      window.onload = function () {
+        //1.创建并注册组件构造器对象
+        Vue.component("cpn1", {
+          template: `#cpn1`,
+          data() {
+            return {
+              title: "cpn1的title",
+            };
+          },
+        });
+
+        const app = new Vue({
+          el: "#app",
+          data: {},
+          components: {
+            cpn3: {
+              template: `#cpn3`,
+            },
+          },
+        });
+      };
+    </script>
+  </head>
+
+  <body>
+    <template id="cpn3">
+      <div>
+        <h2>cpn3</h2>
+      </div>
+    </template>
+    <div id="app">
+      <!-- 3. 使用组件 -->
+
+      <cpn1></cpn1>
+      <cpn3></cpn3>
+    </div>
+  </body>
+</html>

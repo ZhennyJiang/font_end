@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script>
+      window.onload = function () {
+        const cpn = {
+          template: "#cpn",
+          data() {
+            return {
+              cpnname: "cpnname",
+            };
+          },
+          methods: {},
+        };
+
+        new Vue({
+          el: "#app",
+          data: {},
+          components: {
+            cpn,
+          },
+          methods: {},
+        });
+      };
+    </script>
+  </head>
+
+  <body>
+    <template id="cpn">
+      <div>
+        <h2>子组件</h2>
+        <button @click="btnClick">click</button>
+        <slot><button>anli</button></slot>
+      </div>
+    </template>
+
+    <div id="app">
+      <cpn>
+        <button>案例1</button>
+        <button>案例2</button>
+      </cpn>
+      <cpn>
+        <input type="text" value="我是input" />
+      </cpn>
+      <cpn></cpn>
+      <cpn></cpn>
+    </div>
+  </body>
+</html>

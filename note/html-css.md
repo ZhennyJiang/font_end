@@ -633,10 +633,10 @@ border 会影响盒子的大小，因为 border 的像素是增加在盒子之�
 
 如果盒子定义了宽度，则再指定内边距时，padding 会影响盒子的宽度，高度也一样。如果没有定义宽度或高度，则不会影响盒子的宽度或高度。
 
-行内元素的padding值在视觉上内边距是增加了，但是top和bottom的值不会影响排列。
+行内元素的 padding 值在视觉上内边距是增加了，但是 top 和 bottom 的值不会影响排列。
 
 ![](img/padding.jpg)
-两个span元素均与上下的div重叠，而重叠的部分分别是span的padding-top和padding-bottom。 因为行内元素的padding-top和padding-bottom值不影响其他元素的排列。
+两个 span 元素均与上下的 div 重叠，而重叠的部分分别是 span 的 padding-top 和 padding-bottom。 因为行内元素的 padding-top 和 padding-bottom 值不影响其他元素的排列。
 
 #### text-align：
 
@@ -669,6 +669,7 @@ margin 值的分布与 padding 完全一致。
   <div><div></div></div>
 </div>
 ```
+
 <strong>注意，行内块元素不存在外边距塌陷</strong>
 
 若外层的 div 的上边距设置为 20px，内层的上边距设置为 30px，则最终在页面显示的外层 div 上边距为 30px，而内层的上边距为 0。
@@ -678,7 +679,6 @@ margin 值的分布与 padding 完全一致。
 - 可以为父元素定义上边框，如：border：1px solid transparent;
 - 可以为父元素定义上内边距，如：padding-top：1px;（只要有内边距就可以隔开，这个内边距不是定义父级元素和子元素的距离,同时父元素的盒子也会相应变大）
 - 可以为父元素添加 overflow: hidden
-
 
   <strong>浮动的元素不会有外边距塌陷的问题</strong>
 
@@ -797,10 +797,11 @@ float 属性用于创建浮动框，将其移动到一边，直到左边缘或�
    在浮动元素的末尾添加一个空的块级标签，该空标签添加 clear: both 属性。但此方法添加了许多无意义的标签，结构化比较差。
 2. 父级添加 overflow：hidden、auto、scroll（但无法显示溢出的部分）
 3. 给父元素添加 :after 伪元素,如：
-  
+
    ![](img/clearfix.png)
-   
+
    父盒子调用 clearfix 类
+
 4. 添加双伪元素清除浮动
    ![](img/clearfixboth.png)
    ![](img/clearfloat.jpg)
@@ -833,7 +834,7 @@ float 属性用于创建浮动框，将其移动到一边，直到左边缘或�
 相对于其原来的位置，该元素即使发生边偏移，但仍然占有其原来的位置
 
 <strong>3. position: absolute 绝对定位</strong>
- 
+
 相对于祖先级元素，若没有父级元素或者父元素没有定位，则以浏览器为参照物。若祖先元素有定位即使不加偏移也会以父元素为参照物并且以最近一级的<strong>有定位的祖先元素</strong>为参考点移动位置，绝对定位发生边偏移后不占有任何位置(后面的元素会与绝对定位元素重叠)
 
 <strong>子绝父相</strong>: 子元素使用绝对定位，父元素一定使用相对定位。
@@ -1208,3 +1209,13 @@ transition: 要过渡的属性 花费时间 运动曲线 何时开始
 ```
 
 广义的 HTML5 指的是 HTML5 本身+CSS3+JavaScript
+
+### 行内元素之间空白的缝隙
+
+行内元素之间会有空白的缝隙是因为两个元素之间有回车符，html 将回车符当成空白符处理，而空白符之间有一定长度，因此行内元素与行内块元素之间会有空白缝隙。
+
+解决方法：
+
+- 将行内块元素的结束符和开始符写在同一行
+- 父元素中设置 font-size: 0，在子元素上重置正确的 font-size
++ 为元素设置float属性

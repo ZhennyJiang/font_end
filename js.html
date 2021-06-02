@@ -3,72 +3,88 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <style>
-      div {
-        width: 200px;
+      .container {
+        width: 800px;
         height: 200px;
-        background-color: pink;
-        margin: 100px auto;
-        border: 3px solid saddlebrown;
+      }
+
+      .left {
+        font-size: 14px;
+        background: red;
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+      }
+
+      .right {
+        font-size: 14px;
+        background: blue;
+        display: inline-block;
+        width: 100px;
+        height: 100px;
       }
     </style>
   </head>
+
   <body>
-    <div></div>
-    <script>
-      // var x = 10;
-      // function fn() {
-      //   console.log(x);
-      // }
-      // function show(f) {
-      //   var x = 30;
-      //   f();
-      // }
-      // show()
-      // var a = 6;
-      // setTimeout(() => {
-      //   console.log(0);
-      //   alert(a);
-      //   a = 666;
-      // }, 1000);
-      // console.log(1);
-      // a = 66;
-      var obj = {
-        name: "jenny",
-        age: 18,
-        // setName: function () {
-        //   this.name = "angle";
-        // },
-      };
-      setTimeout(
-        function () {
-          console.log(this);
-        }.bind(obj),
-        1000
-      );
+    <div class="container">
+      <div class="left"></div>
+      <div class="right"></div>
+      <span style="background-color: antiquewhite">123</span>
+      <span style="background-color: aqua">456</span>
+      <script>
+        // function iteratorUtil() {
+        //   let index = 0;
+        //   var that = this;
+        //   console.log("调用了");
+        //   if (that instanceof Array) {
+        //     return {
+        //       next() {
+        //         return index < that.length
+        //           ? { value: that[index++], done: false }
+        //           : { value: that[index++], done: true };
+        //       },
+        //     };
+        //   } else {
+        //     let keys = Object.keys(that);
+        //     let length = keys.length;
+        //     console.log(index);
+        //     let key = keys[index++];
 
-      // var obj2 = {};
-      // obj2 = Object.defineProperties(obj, {
-      //   sex: {
-      //     get: function () {
-      //       //当获取扩展的属性值的时候 get自动调用
-      //       //设置值
-      //       console.log("get");
+        //     return {
+        //       next() {
+        //         console.log(index);
 
-      //       return "男";
-      //     },
-      //     set: function (value) {
-      //       //当修改扩展的属性值的时候 set自动调用
-      //       //修改值
-      //       console.log(value, "set");
-      //     },
-      //   },
-      // });
-      // console.log(obj2);
+        //         return index < length
+        //           ? { value: that[keys[index++]], done: false }
+        //           : { value: that[keys[index++]], done: true };
+        //       },
+        //     };
+        //   }
+        // }
+        // var arr = [2, 5, 6];
+        // Array.prototype[Symbol.iterator] = iteratorUtil;
+        // for (let i of arr) {
+        //   console.log(i);
+        // }
 
-      // obj2.sex = "女"; //当有这个设置的时候set就会自动接收值并设置值
-      // console.log(obj2.sex);
-    </script>
+        // console.log(...arr); //三点运算符也是iterator接口
+
+        // Object.prototype[Symbol.iterator] = iteratorUtil;
+        // var obj = { name: "tom", age: 18 };
+        // for (let i of obj) {
+        //   console.log(i);
+        // }
+        // Object.keys(obj).forEach(function (key) {
+        //   console.log(key);
+        // });
+        function fun() {}
+        let fn = () => {};
+        console.log(fun);
+      </script>
+    </div>
   </body>
 </html>

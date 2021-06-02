@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .active {
+        color: red;
+      }
+      .line {
+        background-color: antiquewhite;
+      }
+    </style>
+    <script src="../vue.js"></script>
+    <script>
+      window.onload = function () {
+        const app = new Vue({
+          el: "#app",
+          data: {
+            message: "hhh",
+            imgURL: "../img/学成在线.png",
+            isActive: true,
+            isLine: true,
+            movies: ["a", "b", "c", "d"],
+            activeIndex: 0,
+            finalFontSize:100,
+            baseStyle1:{backgroundColor:'pink'},
+            baseStyle2:{fontSize:'50px'},
+          },
+          methods: {
+            change: function () {
+              this.isActive = !this.isActive;
+            },
+            getClasses: function () {
+              return { active: this.isActive, line: this.isLine };
+            },
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <img v-bind:src="imgURL" alt="" />
+      <div>{{message}}</div>
+      <h2 :class="{active:isActive,line:isLine}" @click="change">
+        {{message}}
+      </h2>
+      <h2 :class="getClasses()" @click="change">{{message}}</h2>
+      <ul>
+        <li v-for="(m , index) in movies" :class={active:activeIndex==index} @click="activeIndex=index">{{m}}</li>
+      </ul>
+      <p :style="{color:'red',fontSize:finalFontSize+'px'}">hhh</p>
+      <p :style="[baseStyle1,baseStyle2]">hhh</p>
+    </div>
+  </body>
+</html>

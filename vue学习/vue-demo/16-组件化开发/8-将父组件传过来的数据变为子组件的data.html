@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script>
+      window.onload = function () {
+        const cpn = {
+          template: "#cpn",
+          props: {
+            number1: Number,
+          },
+          data() {
+            return {
+              dnumber: this.number1,
+            };
+          },
+          methods: {
+            num1Change(event) {
+              this.dnumber = event.target.value;
+              this.$emit("num1change", this.dnumber);
+            },
+          },
+        };
+
+        new Vue({
+          el: "#app",
+          data: {
+            num1: 0,
+          },
+          components: {
+            cpn,
+          },
+          methods: {
+            numchange(num) {
+              console.log(num);
+              num = parseInt(num);
+              this.num1 = num;
+            },
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <template id="cpn">
+      <div>
+        <h3>{{number1}}</h3>
+        <input type="text" :value="dnumber" @input="num1Change" />
+        <h4>{{dnumber}}</h4>
+      </div>
+    </template>
+    <div id="app">
+      <cpn :number1="num1" @num1change="numchange"></cpn>
+      <h4>父组件：{{num1}}</h4>
+    </div>
+  </body>
+</html>
