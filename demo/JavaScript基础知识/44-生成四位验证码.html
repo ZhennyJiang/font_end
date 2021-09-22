@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生成验证码</title>
+    <style>
+      #codeWrapper {
+        display: inline-block;
+        width: 80px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        font-size: 18px;
+        letter-spacing: 3px;
+        background-color: rgb(250, 221, 226);
+        border: 1px solid rgb(248, 180, 192);
+      }
+      #link {
+        display: inline-block;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        var codeWrapper = document.querySelector("#codeWrapper"),
+          link = document.querySelector("#link");
+
+        //编写一个获取四位随机验证码的方法
+        function queryCode() {
+          //1.准备验证码获取的范围
+          var str = "";
+          var codeArea =
+            "qwertyuipoasdfghjklzxcvbnm" +
+            "QWERTYUIPOASDFGHJKLZXCVBNM" +
+            "1234567890"; //62
+          for (let i = 0; i < 4; i++) {
+            var char = codeArea.charAt(Math.round(Math.random() * 61));
+            if (str.indexOf(char) !== -1) {
+              i--;
+              continue;
+            }
+            str += char;
+          }
+          return str;
+        }
+
+        //开始加载页面就生成一个验证码
+
+        codeWrapper.innerHTML = queryCode();
+        link.onclick = function () {
+          codeWrapper.innerHTML = queryCode();
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <p>1. 数字+字母 2. 找图片 3. 滑动拼图 4. 问答类 5. 点击汉字品成语 ....</p>
+    <div id="codeWrapper"></div>
+    <a href="javascript:;" id="link">看不清楚</a>
+  </body>
+</html>

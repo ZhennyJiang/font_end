@@ -872,19 +872,17 @@ slot 可以使组件具备扩展性，假设我们多次使用同一个组件 cp
 ```html
 <template id="cpn">
   <div>
-    <h2>子组件</h2>
-    <slot><button>我是默认的button</button></slot>
-    <slot><button>我是默认的button</button></slot>
-    <slot><button>我是默认的button</button></slot>
+    <slot name="first"><span>第一个</span></slot>
+    <slot name="second"><span>第二个</span></slot>
+    <input type="text" />
+    <slot name="last"><span>最后一个</span></slot>
   </div>
 </template>
 <!-- 在实例中使用： -->
 <div id="app">
-  <cpn>
-    <input type="text" value="我是input1" />
-  </cpn>
+  <cpn><button slot="second">我变成button了</button></cpn>
 </div>
-<!-- 组件中三个slot都会显示input-->
+<!-- "第二个"变成了"我变成button了" -->
 ```
 
 ### 组件作用域
@@ -902,3 +900,552 @@ slot 可以使组件具备扩展性，假设我们多次使用同一个组件 cp
   <cpn v-show="isShow"></cpn>
 </div>
 ```
+
+### 作用域插槽
+
+pLanguage 是组件 cpn 的数据
+
+```html
+<template id="cpn">
+  <div>
+    <slot>
+      <ul>
+        <li v-for="item in pLanguage">{{item}}</li>
+      </ul>
+    </slot>
+  </div>
+</template>
+```
+
+在这个组件的模板中的默认方式是将 pLanguage 以列表的形式展示。而有时候我们需要将 pLanguage 以不同的方式进行展示，又不想一个一个写元素来代替插槽的默认元素时，我们可以使用 v-slot 的方式：
+
+```javascript
+<script>
+  window.onload = function () {
+    //vue实例
+    const app = new Vue({
+      el: "#app",
+      components: {
+        cpn,
+      },
+    });
+  };
+  //组件
+  const cpn = {
+    template: "#cpn",
+    data() {
+      return {
+        pLanguage: ["a", "b", "c", "d"],
+      };
+    },
+  };
+</script>
+```
+
+```html
+<template id="cpn">
+  <div>
+    <slot :mydata="pLanguage" name="slot1">
+      <ul>
+        <li v-for="item in pLanguage">{{item}}</li>
+      </ul>
+    </slot>
+  </div>
+</template>
+
+<div id="app">
+  <cpn>
+    <template v-slot:slot1="slotProps">
+      <div>{{slotProps.mydata.join()}}</div>
+    </template>
+  </cpn>
+</div>
+```
+
+- 首先我们需要在 template，组件模板中给 slot 绑定自定义属性（任取名字），这里的属性名字是 mydata，使其等于需要用到的数据"pLanguage"。
+- 同时也需要为 slot 自定义名字，这里的 slot 命名为"slot1"。
+- 当我们在 vue 实例使用组件 cpn 时，要结合 template 标签，使用 v-slot:slot 的命名="slotProps"。
+- 这里的 slotProps（可自定义命名）接取的是子组件标签 slot 上属性数据的集合。
+- slotProps 是一个对象，key 是在 slot 绑定的属性的名字，value 是该绑定的属性的值。
+- 由于我们在 slot 只绑定了一个 mydata 属性，因此这里 slotProps 对象里接收的只有 mydata。
+- 然后使用 slotProps.mydata 可以打印出 mydata 属性的值，在这个例子中即 pLanguage
+
+### es 模块化的导出和导入
+
+在多人开发过程中，每个人定义的变量可能会存在命名冲突，因此我们需要进行模块化开发，即将每个人负责的部分封装成一个模块。
+
+1. 在 html 页面中，我们导入 js 文件时，需要添加 type="module"
+
+```html
+<script src="a1.js" type="module"></script>
+<script src="a2.js" type="module"></script>
+<script src="a11.js" type="module"></script>
+```
+
+假设 a11.js 需要用到 a1.js 中的变量，这时我们就需要 a1 导出变量，a11 导入变量。
+
+a1.js
+
+```javascript
+var name = "小明";
+var flag = true;
+function sum(n1, n2) {
+  return n1 + n2;
+}
+
+//1.导出方式一
+export { flag, sum };
+//2. 导出方式二
+export var num = 3;
+//3. 导出函数/类
+export function xx(num1, num2) {
+  return num1 * num2;
+}
+export class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  run() {
+    console.log("running");
+  }
+}
+
+/*4. export default 某些情况下，我们并不希望导入的变量有其固定的名字，而是由我们自由命名
+export default只能有一个
+var address = "hhh";*/
+
+//export default address;
+export default function (num1) {
+  return num1 * 10;
+}
+```
+
+a11.js
+
+```javascript
+//1. 导入export{}中的变量
+import { flag, sum } from "./a1.js";
+console.log(sum(50, 10));
+console.log(123);
+
+//2. 导入在export时定义的变量
+import { num } from "./a1.js";
+console.log(num);
+
+//3. 导入export的function和类
+
+import { xx, Person } from "./a1.js";
+console.log(xx(2, 3));
+
+const p = new Person("jenny", 18);
+p.run();
+
+//4. export default导出的数据
+import tenM from "./a1.js";
+console.log(tenM(5));
+
+//5. 把所有导出的数据都导入
+
+import * as allData from "./a1.js";
+console.log(allData);
+console.log(allData.num, allData.Person);
+```
+
+### 什么是 webpack
+
+webpack——现代 JavaScript 应用的静态模块打包工具
+
+- webpack 其中一个核心就是让我们可能进行模块化开发，并且会帮助我们处理模块间的依赖关系。
+- 而且不仅仅是 JavaScript 文件，我们的 CSS、图片、json 文件等等在 webpack 中都可以被当做模块来使用
+- 打包就是讲 webpack 中的各种资源模块进行打包合成一个或多个包（Bundle）
+
+* 在打包过程中可以对资源进行处理，比如压缩图片，将 sass 转成 css，es6 语法转成 es5 语法等等让浏览器可识别的操作
+
+webpack 依赖于 node 环境，而 node 环境为了可以正常执行很多的代码，又必须包含各种依赖的包，而 npm(node package manager node 包管理器)则是管理这些包的工具。
+
+### webpack 的基本使用
+
+- 首先创建一个文件夹，里面包含 index.html 文件、 src 文件夹和 dist 文件夹。src 文件夹主要用来存放我们要开发的代码，dist 文件夹用来存放打包后的代码。
+- 终端输入 npm init 建立 package.json 文件.
+- 终端输入 npm run build 建立 package-lock.json 文件（用于保存 package.json 依赖的包）.
+
+在 src 文件夹中创建两个文件，info.js 和 main.js
+
+info.js
+
+```javascript
+let name = "jenny",
+  age = 18,
+  height = "1.77";
+//使用es6的模块化规范
+export { name, age, height };
+```
+
+main.js
+
+```javascript
+import { name, age, height } from "./info";
+console.log(name, age, height);
+```
+
+但此时我们并不能直接执行 js 文件，而是要先在根文件夹终端中输入命令"\$webpack ./src/main.js ./dist/bundle.js"
+
+意思是利用 webpack 将 main.js 及其依赖的文件打包成 bundle.js 文件并放在 dist 文件夹中。这里没有打包 info.js 文件是因为 webpack 会自动将我们输入的文件如 main.js 文件和与其有关的依赖的文件一起打包，我们只需要给 webpack 一个入口文件，剩余的工作它都会帮我们完成。
+
+接下来我们需要在 index.html 中将打包好的 bundle.js 导入就可以使用上述两个 js 文件了
+
+```html
+<body>
+  <script src="./dist/bundle.js"></script>
+</body>
+```
+
+如果后续我们还添加了一些依赖的文件，则再输入一次命令"\$webpack ./src/main.js ./dist/bundle.js"即可
+
+由于"\$webpack ./src/main.js ./dist/bundle.js"有点长，我们可以对 webpack 进行配置。
+
+定义一个文件，命名为“webpack.config.js”，注意这里一定要存在 package.json 文件，即用 npm init 创建的文件
+
+webpack.config.js
+
+```javascript
+const path = require("path"); //导入模块，从node的包中获取这个模块
+
+module.exports = {
+  entry: "./src/main.js",
+  output: {
+    path: path.resolve(__dirname, "dist"), //dirname保存的是当前文件所在的目录,这样就可以获得dist的绝对路径
+    filename: "bundle.js",
+  },
+};
+```
+
+此时我们直接在终端输入 webpack 就可以打包啦
+
+但我们如果想把“webpack”命令换成“npm run build”可以在 package.json 文件中的“scripts”下添加：
+
+```javascript
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"//这里是自行添加的
+  },
+```
+
+此时我们就可以在终端输入 npm run build 命令就可以打包啦
+
+在 cmd 中安装的 webpack 是全局的，但当我们在开发时，我们需要用的版本可能跟我们全局的版本不太一样，这时我们可以在相应文件夹的终端下载局部的 webpack“npm install webpack@3.6.0 --save-dev” 其中的 3.6.0 可以改成自己需要的版本号
+
+只要在终端敲的命令都是全局的，比如直接写 webpack，但使用自定义的 npm rum build 有线使用本地的
+
+### loader
+
+webpack 主要是用来处理我们写的 js 代码，并且 webpack 会自动处理 js 之间相关的依赖。但是在开发中我们不仅仅有基本的 js 代码处理，我们也需要加载 css、图片、也包括一些高级的将 es6 转成 es5 代码，将 typescript 转成 es5 代码等等，而 webpack 不支持这些转化，因此我们需要将 webpack 扩展对应的 loader
+
+loader 使用过程：
+
+1. 通过 npm 安装需要使用的 loader
+2. 在 webpack.config.js 中的 modules 关键字下进行配置
+
+### Vue CLI 脚手架
+
+Vue CLI 依赖于 nodejs 和 webpack，因此需要安装 nodejs 和 webpack，在上面已经讲过要怎么安装了
+
+1. 安装 Vue CLI，终端输入"npm install -g @vue/cli"
+2. 使用命令 vue --version 检查自己安装的脚手架版本
+3. 使用命令 npm uninstall -g @vue/cli 可卸载脚手架
+4. 使用 npm install @vue/cli-init -g 可以下载 cli2
+
+Vue CLI2 初始化项目：
+vue init webpack projectname
+
+Vue CLI3 初始化项目：
+Vue create projectname
+
+### runtime-compiler 和 runtime-only 的
+
+1. runtime-compiler（代码更多）：
+   把 template 传给 vue 时，会在 vm.options 保存，然后解析为 ast（abstract syntax tree 抽象语法树）
+   ，再编译成 render 函数，通过 render 函数翻译成虚拟 dom，然后从 render 函数创建一些虚拟 dom 的节点，最终形成虚拟 dom 树，最终渲染成真实的 dom ，即 UI
+
+2. runtime-only（性能更好，代码更少）：
+   将组件解析为 ast（abstract syntax tree 抽象语法树），再编译成 render 函数，通过 render 函数翻译成虚拟 dom，然后从 render 函数创建一些虚拟 dom 的节点，最终形成虚拟 dom 树，最终渲染成真实的 dom ，即 UI
+
+runtime-only 没有 template，而引用的组件是已经被解析过的对象，里面的 template 都已经通过 vue-template-compiler 转成了 render 函数。
+
+假设在开发中依然使用 template 则选择 runtime-compiler，使用.vue 文件夹开发则选择 runtime-only
+
+### vue ui
+
+在终端输入 vue ui 可以启动 Vue 项目管理器
+
+### vue.config.j
+
+如果对配置不满意可以在文件根目录创建一个 vue.config.js 文件，只能是这个名字
+
+### 前端渲染和后端渲染
+
+- 后端渲染：用户输入网址，浏览器将网址发送到服务器，服务器将 html+css 渲染好页面后返回给浏览器。服务器直接生产渲染好的对应的 html 页面 ，返回给客户端进行展示
+
+- 后端路由：后端处理 URL 和页面之间的映射关系。
+- 前端渲染：浏览器中显示的网页中的大部分内容，都是由前端写的 js 代码在浏览器中执行，最终渲染出来的网页。用户输入网址，浏览器从静态资源服务器下载 html+css
+  +js 代码，渲染到页面，然后再抢提供 API 接口的服务器请求数据，再一次渲染到页面
+
+- 前端路由：SPA 页面（单页富应用），只有一个页面，最开始请求服务的时候就直接从服务器中下载一套 html+css+js 代码， 我们每点击一个需要跳转页面的元素，浏览器去对应的 js 代码寻找组件，一个 url 对应一个组件，这里就是前端路由，url 对应的组件不由后端管理，而是由前端管理
+
+SPA 页面最主要的特点就是在前后端分离的基础上佳乐一层前端路由，改变 URL，但页面不进行整体的刷新
+
+### URL 的 hash、history
+
+URL 的 hash 也就是锚点（#），本质上是改变 window.location 的 href 属性。我们可以通过直接复制 location.hash 来改变 href，但是页面不发生刷新。改变 location.href 就会发生刷新。
+
+#### history.pushState({},"",网址)
+
+history.pushState({},"",home) 和 URL hash 的作用一样，但这个是类似于栈结构，先进后出。当我们使用多个 history.pushState 的时候如：
+
+```javascript
+history.pushState({}, "", home);
+//此时的网址变为localhost:8081/home
+history.pushState({}, "", about);
+//此时的网址变为localhost:8081/about
+history.pushState({}, "", aaa);
+history.pushState({}, "", bbb);
+//此时的网址变为localhost:8081/bbb
+//输入history.back(),回到localhost:8081/aaa，向后一层
+//输入history.back(),回到localhost:8081/about
+//输入history.forward(),回到localhost:8081/aaa，向前一层
+```
+
+可以保留很多历史记录
+
+#### history.go()
+
+在使用 history.pushState 的基础上，输入 history.go(-1)则相当于 history.back()， history.go(-2)返回两层，history.go(2)进两层
+
+#### history.replaceState
+
+使用 history.replaceState 则是替换，而不是像栈结构一样，不能返回
+
+### vue-router
+
+vue-router 适用于构建单页面应用，映射组件渲染到页面 。
+
+使用：
+
+- 导入路由对象，并且滴啊哦哟恒 Vue.use(VueRouter)
+- 创建路由实例，并且传入路由映射配置
+- 在 Vue 实例中挂在创建的路由实例
+
+router 文件夹中的 index.js
+
+![](img/vue-router.png)
+
+![](img/router-link.jpg)
+
+组件的渲染位置决定于 router-view 在 router-link 的上方还是下方。
+
+当我们点击了某个 router-link 的时候，该组件对应的根元素就会自动添加"router-link-active"类，这时我们可以为这个类自定义一些属性。
+
+但是如果我们需要把"router-link-active"这个类的名字改成其他相对比较简单的名字如“active”，我们可以在 router-link 中添加属性"active-link='active'"，但这需要给每 router-link 都添加。这时我们还可以到路由中的 router 实例中修改：
+![](img/linkActive.jpg)
+
+router-link 添加 replace 属性，禁止返回
+
+如果我们不想要通过 router-link 刷新页面，我们可以通过监听事件来刷新：
+
+![](img/this.$router.jpg)
+
+this.\$router.push('')是有返回的
+
+this.\$router.replace('')没有返回
+
+### 路由的懒加载（用到时再加载）
+
+- 当打包构建应用时，Javascript 包会变得非常强大，影响页面加载。
+- 如果我们能把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就更加高效了
+
+(+ 首先,我们知道路由中通常会定义很多不同的页面.
+
+- 这个页面最后被打包在哪里呢?一般情况下，是放在一个 js 文件中.口但是,页面这么多放在一个 js 文件中,必然会造成这个页面非常的大
+- 如果我们一次性从服务器请求下来这个页面,可能需要花费一定的时间,甚至用户的电脑上还出现了短暂空白的情况.
+- 如何避免这种情况呢?使用路由懒加载就可以了.)
+
+![](img/懒加载.jpg)
+
+import 的位置改变了
+
+![](img/懒加载方式.jpg)
+
+方式三有两种表达方式
+
+1.  ![](img/懒加载方式三1.jpg)
+
+2.  ![](img/懒加载方式三2.jpg)
+
+### 路由嵌套
+
+- 创建对应的子组件，并且在路由映射中配置对应的子路由
+- 在组件内部使用\<router-view>标签
+
+![](img/子路由1.jpg)
+![](img/子路由2.jpg)
+
+### vue-router 参数传递
+
+传递参数的方式：
+
+1. params
+
+- 配置路由格式：/router/:自定义
+
+```javascript
+{
+  path:'/user/:id',
+  component:User
+}
+```
+
+- 传递的方式： 在 path 后面跟上对应的值
+
+![](img/传递参数1.jpg)
+
+```javascript
+ <router-link :to="'/user/'+userId">用户</router-link>
+```
+
+- 传递后形成的路径 ：/router/id1，/router/id2
+
+query 的类型：
+
+- 配置路由格式：/router，也就是普通配置
+- 传递的方式：对象中使用 query 的 key 作为传递方式
+- 传递后形成的路径：/router?id=123,//router?id=abc
+
+![](img/传递参数2.jpg)
+
+![](img/传递参数3.jpg)
+
+最终展示效果
+
+![](img/传递参数4.jpg)
+
+### 导航守卫
+
+实现切换路由时 document 的标题随着改变
+![](img/导航守卫.jpg)
+
+### keep-alive
+
+每次我们切换组件时都是重新创建组件，要想保持每次组件的状态可以使用 keep-alive
+
+- keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染。
+
+- router-view 也是一个组件，如果直接被包在 keep-alive 里面，所有路径匹配到的视图组件都会被缓存；
+
+使用方法如下：
+
+![](img/keepAlive.jpg)
+
+在 data 里面定义 path，也就是 Home 组件默认的路由（进入 Home 界面默认显示 home1 还是 home2）
+
+![](img/keepAlive1.jpg)
+
+注意要把 Home 路由的子路由的重定向删除
+
+![](img/keepAlive2.jpg)
+
+1. keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染。它们有两个非常重要的属性:
+
+- include -字符串或正则表达，只有匹配的组件会被缓存
+- exclude - 字符串或正则表达式，任何匹配的组件都不会被缓存
+
+2. router-view 也是一个组件，如果直接被包在 keep-alive 里面，所有路径匹配到的视图组件都会被缓存 ∶
+
+假设在该包含了 keep-alive 的 router-view 里面有不想缓存的组件，可以在 keep-alive 中，添加 exclude='不想被缓存的组件的 name，有多个不缓存的组件则用逗号隔开（注意不能加空格）exclude='name1,name2'
+
+![](img/kk.jpg)
+
+### promise
+
+用来封装异步函数的，防止回调地狱
+
+![](img/promise.jpg)
+
+```javascript
+Promise.all([
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("11");
+    }, 3000);
+  }),
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("13");
+    }, 2000);
+  }),
+]).then((result) => {
+  console.log(result);
+});
+```
+
+Promise.all 是将所有的 promise 封装的异步函数执行完后再执行 then 里面的代码
+
+### Vuex
+
+Vuex 是专门为 Vue.js 应用程序开发的状态管理模式
+
+- 它采用集中式存储管理应用的所有组件状态，并以相应的规则保证状态以一种可预测的方式发生变化
+
+- Vuex 也集成到 Vue 的官方调试工具 devtools extension，提供了注入零配置的 time-travel 调试、状态快找导入导出等高级调试功能
+
+总而言之，Vuex 使某个状态能在多个组件中共享的插件，是响应式的
+
+#### 什么样的状态需要共享
+
+- 用户的登录状态、名称、头像等信息
+- 商品的收藏、购物车的商品等
+
+#### vuex 的使用
+
+- 在使用脚手架创建项目的时候选择 vuex
+- 在 src 内的 store 文件夹中的 index.js，state 是用来存储共享的数据的
+
+  ![](img/store-index.jpg)
+
+调用方法：\$store.state.被调用的数据
+
+![](img/状态调用.jpg)
+
+修改共享状态：
+
+1. 可以用，但不建议用
+
+![](img/修改状态1.jpg)
+
+![](img/状态调用图.jpg)
+
+只要是修改 State 状态一定是通过 mutations 修改的，这样 Devtools 才会记录状态的修改日志，最终调错时才会更加方便
+
+2.  通过 mutation 改变
+
+![](img/mutations.jpg)
+
+![](img/mutations2.jpg)
+
+![](img/mutations3.png)
+
+<strong>vuex 的 store 状态的更新唯一方式 Mutation</strong>
+
+### Mutation 相应规则：
+
+Vuex 的 store 中的 state 是响应式的,当 state 中的数据发生改变时, Vue 组件会自动更新.这就要求我们必须遵守一些 Vuex 对应的规则:
+
+提前在 store 中初始化好所需的属性，已有的对象和属性的值的更改具有响应式，而对“对象的属性”或“属性”进行直接的增删，虽然能够使 state 里面的实际数据进行改变，但其不具有响应式，不能反映到页面中，因为这些数据没有被监听
+
+当给 state 中的对象增删新属性时,使用下面的方式:
+
+- 方式一:使用 Vue.set(obj, 'newProp',123)
+- 方式二:用新对象给旧对象重新赋值
+- 方式三：Vue.delete(state.obj,deleteProp)
+
+### Mutation 的常量类型

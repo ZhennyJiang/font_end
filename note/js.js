@@ -1,13 +1,39 @@
-// var arr = [1, 2, 3, 4];
-// function compate() {
-//   return Math.random() - 0.5;
+// function queryCode() {
+//   //1.准备验证码获取的范围
+//   var str = "";
+//   var codeArea =
+//     "qwertyuipoasdfghjklzxcvbnm" + "QWERTYUIPOASDFGHJKLZXCVBNM" + "1234567890"; //62
+//   for (let i = 0; i < 4; i++) {
+//     var char = codeArea.charAt(Math.round(Math.random() * 61));
+//     if (str.indexOf(char) !== -1) {
+//       i--;
+//       continue;
+//     }
+//     str += char;
+//   }
+//   return str;
 // }
-// arr.sort(compate);
-// console.log(arr);
-var a = 1;
-console.log(a++);
-console.log(++a);
-console.log(++a);
+// console.log(queryCode());
 
-console.log(a++);
-console.log(a);
+f = function () {
+  return true;
+};
+g = function () {
+  return false;
+};
+console.log("11");
+
+~(function () {
+  if (g() && [] == ![]) {
+    f = function () {
+      return false;
+    };
+    function g() {
+      return true;
+    }
+  }
+})();
+
+console.log(f()); //xxx
+console.log(g()); //true
+console.log([] == ![]);

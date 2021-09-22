@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="ul">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <!-- hhhhh -->
+      <li>5</li>
+    </ul>
+    <script>
+      function mChildren(curEle) {
+        var nodeList = curEle.children,
+          result = [];
+        for (let i = 0; i < nodeList.length; i++) {
+          if (nodeList[i].nodeType === 1) {
+            result.push(nodeList[i]);
+          }
+        }
+        return result;
+      }
+      function mnextSibling(curEle) {
+        var next = curEle.nextSibling;
+        while (next && next.nodeType !== 1) {
+          next = next.nextSibling;
+        }
+        return next;
+      }
+      function mlastSibling(curEle) {
+        var last = curEle.lastSibling;
+        while (last && last.nodeType !== 1) {
+          last = last.lastSibling;
+        }
+        return last;
+      }
+      var ul = document.getElementById("ul");
+      var lis = mChildren(ul);
+      console.log(lis);
+    </script>
+  </body>
+</html>

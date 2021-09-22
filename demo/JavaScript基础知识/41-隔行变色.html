@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>隔行变色</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+      }
+      .box {
+        margin: 20px auto;
+        width: 300px;
+      }
+      .box > li {
+        padding: 0 5px;
+        line-height: 35px;
+        border-bottom: 1px dashed #aaa;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .ba {
+        background-color: antiquewhite;
+      }
+      .wrapper {
+        margin: 0 auto;
+        width: 500px;
+      }
+      .tab {
+        overflow: hidden;
+        position: relative;
+        top: 1px;
+      }
+      .tab > li {
+        text-align: center;
+        float: left;
+        width: 30px;
+        height: 20px;
+        margin-right: 5px;
+        border: 1px solid black;
+        line-height: 20px;
+        cursor: pointer;
+      }
+      .wrapper div {
+        display: none;
+        line-height: 50px;
+        border: 1px solid black;
+      }
+      .wrapper div.active {
+        display: block;
+      }
+      .tab > li.active {
+        border-bottom-color: white;
+        z-index: 999;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        var lis = document.querySelector(".box").querySelectorAll("li");
+        for (let i = 0; i < lis.length; i++) {
+          i % 2 === 0 ? null : (lis[i].className += " ba");
+        }
+        var tablis = document.querySelector(".tab").querySelectorAll("li");
+        var tabdivs = document
+          .querySelector(".wrapper")
+          .querySelectorAll("div");
+
+        var lastIndex = 0;
+        for (let i = 0; i < tablis.length; i++) {
+          tablis[i].onclick = function () {
+            if (lastIndex == i) return;
+            tablis[lastIndex].className = tabdivs[lastIndex].className = "";
+            this.className = "active";
+            tabdivs[i].className = "active";
+            lastIndex = i;
+          };
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <ul class="box">
+      <li>11111111111111111111111111111111111111111111</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+    </ul>
+
+    <div class="wrapper">
+      <ul class="tab">
+        <li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+
+      <div class="active">w1</div>
+      <div>w2</div>
+      <div>w3</div>
+    </div>
+  </body>
+</html>

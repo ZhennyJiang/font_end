@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // new Promise((resolve, reject) => {
+      //   //成功的时候调用resolve，然后执行then里面的代码
+      //   // resolve("Hel");
+      //   //失败调用reject
+      //   reject("error");
+      // }, 1000)
+      //   .then((data) => {
+      //     console.log(data);
+      //     console.log(data);
+      //     console.log(data);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+
+      Promise.all([
+        new Promise((resolve, reject) => {
+          // $ajax({
+          //   url: "url1",
+          //   success: function (data) {
+          //     resolve(data);
+          //   },
+          // });
+          setTimeout(() => {
+            resolve("11");
+          }, 3000);
+        }),
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("13");
+          }, 2000);
+        }),
+      ]).then((result) => {
+        console.log(result);
+      });
+    </script>
+  </body>
+</html>

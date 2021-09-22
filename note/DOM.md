@@ -41,12 +41,12 @@ console.dir(id1);
 
 #### 根据标签获取页面元素
 
-1. 使用 getElementByTagName()方法可以根据标签获取元素对象的集合，并且是以伪数组的形式存储的（有索引、有长度）
+1. 使用 getElementsByTagName()方法可以根据标签获取元素对象的集合，并且是以伪数组的形式存储的（有索引、有长度）
    如果页面中没有这个元素存在，则返回空的伪数组形式
 
 ```JavaScript
 
-var lis = document.getElementByTagName('li');
+var lis = document.getElementsByTagName('li');
 
 console.log(lis);  //获取所有li标签
 //lis[0]即第一个li元素
@@ -97,6 +97,269 @@ console.dir(bodyEle);//获取该元素的所有内容和方法
 var htmlEle = document.documentElement;
 console.log(htmlEle);
 ```
+
+### 获取浏览器一屏幕的宽度和高度（兼容所有的浏览器）
+
+document.documentElement.clientWidth || document.body.clientWidth
+
+document.body.clientHeight || document.body.clientHeight
+
+### 获取页面中所有id为xxx的元素
+
+在js中，默认会把元素的id设置为变量，可以直接console.log(xxx)就可以把id为xxx的元素打印出来。如果有id重复，就是获取一个集合，否则就是一个元素
+
+## 节点
+>在一个HTML文档中出现的所有东西都是节点
+>
+>- 元素节点（HTML标签)
+>- 文本节点（文字内容)
+>- 注释节点（注释内容)
+>- 文档节点（document）
+
+`元素节点`
+
++ nodeType: 1
++ nodeName:大写标签名
++ nodeValue: null
+
+`文本节点`
+
++ nodeType: 3
++ nodeName: '#text'
++ nodeValue:文本内容
+
+`注释节点`
++ nodeType:8
++ nodeName: '#comment'
++ nodeValue:注释内容
+  
+`文档节点`
++ nodeType: 9
++ nodeName: '#document'
++ nodeValue: null
+
+### 获取元素通常使用两种方式:
+
+1.利用 DOM 提供的方法获取元素
+
+- document.getElementById()
+
+- document.getElementsByTagName()
+
+- document.querySelector()等
+
+- 逻辑性不强、繁琐
+
+  2.利用节点层级关系获取元素
+
+- 利用父子兄节点关系获取元素
+
+- 逻辑性强，但是兼容性稍差
+
+一般地，节点至少拥有 nodeType (节点类型)、nodeName (节点名称)和 nodeValue
+
+基本属性：
+
+元素节点 nodeType 为 1
+
+属性节点 nodeType 为 2
+
+文本节点 nodeType 为 3(文本节点包含文字、空格、换行等)
+
+我们在实际开发中节点操作主要操作的是元素节点
+
+### 父节点 parentNode
+
+```html
+<div class="box">
+  <span class="son">x</span>
+</div>
+```
+
+```javascript
+var son = document.querySelector(".son");
+console.log(son.parentNode); //<div class="box"><span class="son" >x</span></div>
+```
+
+如果没有父节点则返回 null
+
+### 子节点
+
+#### 1. node.childNodes
+
+parentNode.childNodes 返回包含指定节点的子节点的集合，该集合为即时更新的集合。
+
+注意:返回值里面包含了所有的子节点，包括元素节点，文本节点等。
+
+如果只想要获得里面的元素节点，则需要做以下专门处理。所以我们一般不提倡使用 childNodes
+
+```javascript
+var ul = document.querySelector("ul");
+for (var i = o; i < ul.childNodes.length; i++) {
+  if (ul.childNodes[i].nodeType == 1) {
+    // ul.childNodes[i]是元素节点
+    console.log(ul.childNodes[i]);
+  }
+}
+```
+
+#### 2. node.children(非标准)
+
+node.children 是一个只读属性，返回所有的子元素节点，是伪元素。它只返回子元素节点，其余节点不返回(这个是我们重点掌握的)。
+
+虽然 children 是一个非标准，但是得到了各个浏览器的支持，因此我们可以放心使用
+
+#### 3. 第一个子节点
+
+node.firstChild
+
+firstChild 返回第一个子节点，找不到则返回 null。同样，也是包含所有的节点。
+
+#### 4. 最后一个子节点
+
+node.lastChild
+
+lastChild 返回最后一个子节点，找不到则返回 null。同样，也是包含所有的节点。
+
+#### 5. node.firstElementChild
+
+firstElementChild 返回第一个子元素节点，找不到则返回 null。
+
+#### 6. node.lastElementChild
+
+lastElementChild 返回最后一个子元素节点，找不到则返回 null。
+
+注意 ∶ 这两个方法有兼容性问题，IE9 以上才支持。
+
+实际开发的写法既没有兼容性问题又返回第一个子元素
+
+```javascript
+console.log(ol.children[0]);
+console.log(ol.children[ol.children.length - 1]);
+```
+
+### 兄弟节点
+
+#### 1. element.nextSibling 得到下一个兄弟节点（包括文本节点），找不到则返回 null
+
+```html
+<div>我是div</div>
+<span>我是span</span>
+<script>
+  var div = document.querySelector("div");
+  // nextSibling 下一个兄弟节点包含元素节点或者文本节点等等
+  console.log(div.nextSibling);
+</script>
+```
+
+#### 2. element.previousSibling 得到上一个兄弟节点（包括文本节点），找不到则返回 null
+
+#### 3. element.nextElementSibling 得到下一个兄弟元素节点
+
+#### 4. element.previousElementSibling 得到上一个兄弟元素节点
+
+这两个方法可以得到元素节点，但是有兼容性问题，要解决元素节点和兼容性问题可以通过封装函数来解决
+
+```javascript
+function getNextElementSibling(element) {
+  var el = element;
+  while ((el = el.nextSibling)) {
+    if (el.nodeType === 1) {
+      return el;
+    }
+  }
+  return null;
+}
+```
+
+#### 节点的添加与删除
+1. createElement创建节点 element.appendChild在父元素尾部追加节点
+```html
+<ul></ul>
+<script>
+  // 1．创建节点元素节点
+  var li1 = document.createElement("li");
+  var li2 = document.createElement("li");
+  //2．添加节点 node.appendChild(child) node 父级 child是子级,是后面追加元素
+  var ul = document.querySelector("ul");
+  ul.appendChild(li1);
+  //3．添加节点 node.insertBefore(child,指定元素) node 父级 child是子级，在指定元素前面追加元素
+  ul.insertBefore(li2, ul.children[0]);
+</script>
+```
+2. insertBeforeChild 
+```javascript
+  var insertedNode = parentNode.insertBefore(newNode, referenceNode);
+```
++ insertedNode 被插入节点(newNode)
++ parentNode 新插入节点的父节点
++ newNode 用于插入的节点
++ referenceNode newNode 将要插在这个节点之前
+
+如果 referenceNode 为 null 则 newNode 将被插入到子节点的末尾。
+
+3. element.insertAdjacentHTML(position,text);
+   position是相对元素的位置，并且是以下字符串之一：
+   + 'beforebegin' 元素自身的前面
+   + 'afterbegin' 插入元素内部的第一个节点之前
+   + 'beforeend' 插入元素内部的第一个节点之后
+   + 'afterend' 元素自身的后面
+```html
+<ul>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+<script>
+  var ul = document.querySelector("ul");
+  var li = '<li class="a">123</>'
+ ul.insertAdjacentHTML('beforeend',li);//这时ul的长度为4，多出一个<li class="a">123</>
+</script>
+```
+
+
+text是要被解析的HTML或XML，并插入到DOM树中的字符串
+1. 删除节点 node.removeChild(child)
+
+```html
+<ul>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+<script>
+  var ul = document.querySelector("ul");
+  ul.removeChild(ul.children[0]);
+</script>
+node.removeChild(child)这里的node必须是要删除的节点的父节点，child是要删除的节点
+```
+
+
+#### 克隆节点 node.cloneNode()
+
+node.cloneNode() 浅克隆，只克隆当前的标签
+
+node.cloneNode(true) 深克隆，克隆当前的标签及其里面的内容
+
+node.cloneNode ()方法返回调用该方法的节点的一个副本。也称为克隆节点/拷贝节点
+
+注意 ∶ 1.如果括号参数为空或者为 false，则是浅拷贝，即只克隆复制节点本身，不克隆里面的子节点。
+⒉.如果括号参数为 true，则是深度拷贝，会复制节点本身以及里面所有的子节点。
+
+```javascript
+var ul = document.querySelector("ul");
+// 1. node.cloneNode();括号为空或者里面是false 浅拷贝只复制标签不复制里面的内容l/
+node.cloneNode(true); //括号为true 深拷贝复制标签复制里面的内容
+
+var lili = ul.children[0].cloneNode(true); //复制ul.children[0]
+ul.appendChild(lili);
+```
+
+1. document.write 是直接将内容写入页面的内容流，但是文档流执行完毕，则它会导致页面全部重绘
+2. innerHTML，是将内容写入某个 DOM 节点，不会导致页面全部重绘
+3. innerHTML 创建多个元素效率更高（拼接字符串效率则会比较低，采取数组形式拼接则效率高），结构稍微复杂
+4. createElement ()创建多个元素效率稍低一点点，但是结构更清晰
+
 
 ### 事件
 
@@ -288,222 +551,7 @@ console.log(div.dataset['listName']);
 
 ```
 
-#### 获取元素通常使用两种方式:
 
-1.利用 DOM 提供的方法获取元素
-
-- document.getElementById()
-
-- document.getElementsByTagName()
-
-- document.querySelector()等
-
-- 逻辑性不强、繁琐
-
-  2.利用节点层级关系获取元素
-
-- 利用父子兄节点关系获取元素
-
-- 逻辑性强，但是兼容性稍差
-
-一般地，节点至少拥有 nodeType (节点类型)、nodeName (节点名称)和 nodeValue
-
-基本属性：
-
-元素节点 nodeType 为 1
-
-属性节点 nodeType 为 2
-
-文本节点 nodeType 为 3(文本节点包含文字、空格、换行等)
-
-我们在实际开发中节点操作主要操作的是元素节点
-
-### 父节点 parentNode
-
-```html
-<div class="box">
-  <span class="erweima">x</span>
-</div>
-```
-
-```javascript
-var erweima = document.querySelector(".erweima");
-console.log(erweima.parentNode); //<div class="box"><span class="erweima" >x</span></div>
-```
-
-如果没有父节点则返回 null
-
-### 子节点
-
-#### 1. node.childNodes
-
-parentNode.childNodes 返回包含指定节点的子节点的集合，该集合为即时更新的集合。
-
-注意:返回值里面包含了所有的子节点，包括元素节点，文本节点等。
-
-如果只想要获得里面的元素节点，则需要做以下专门处理。所以我们一般不提倡使用 childNodes
-
-```javascript
-var ul = document.querySelector("ul");
-for (var i = o; i < ul.childNodes.length; i++) {
-  if (ul.childNodes[i].nodeType == 1) {
-    // ul.childNodes[i]是元素节点
-    console.log(ul.childNodes[i]);
-  }
-}
-```
-
-#### 2. parentNode.children(非标准)
-
-parentNode.children 是一个只读属性，返回所有的子元素节点，是伪元素。它只返回子元素节点，其余节点不返回(这个是我们重点掌握的)。
-
-虽然 children 是一个非标准，但是得到了各个浏览器的支持，因此我们可以放心使用
-
-#### 3. 第一个子节点
-
-parentNode.firstChild
-
-firstChild 返回第一个子节点，找不到则返回 null。同样，也是包含所有的节点。
-
-#### 4. 最后一个子节点
-
-parentNode.lastChild
-
-lastChild 返回最后一个子节点，找不到则返回 null。同样，也是包含所有的节点。
-
-#### 5. parentNode.firstElementChild
-
-firstElementChild 返回第一个子元素节点，找不到则返回 null。
-
-#### 6. parentNode.lastElementChild
-
-lastElementChild 返回最后一个子元素节点，找不到则返回 null。
-
-注意 ∶ 这两个方法有兼容性问题，IE9 以上才支持。
-
-实际开发的写法既没有兼容性问题又返回第一个子元素
-
-```javascript
-console.log(ol.children[0]);
-console.log(ol.children[ol.children.length - 1]);
-```
-
-### 兄弟节点
-
-#### 1. element.nextSibling 得到下一个兄弟节点（包括文本节点），找不到则返回 null
-
-```html
-<div>我是div</div>
-<span>我是span</span>
-<script>
-  var div = document.querySelector("div");
-  // nextSibling 下一个兄弟节点包含元素节点或者文本节点等等
-  console.log(div.nextSibling);
-</script>
-```
-
-#### 2. element.previous Sibling 得到上一个兄弟节点（包括文本节点），找不到则返回 null
-
-#### 3. nextElementSibling 得到下一个兄弟元素节点
-
-#### 4. previousElementSibling 得到上一个兄弟元素节点
-
-这两个方法可以得到元素节点，但是有兼容性问题，要解决元素节点和兼容性问题可以通过封装函数来解决
-
-```javascript
-function getNextElementSibling(element) {
-  var el = element;
-  while ((el = el.nextSibling)) {
-    if (el.nodeType === 1) {
-      return el;
-    }
-  }
-  return null;
-}
-```
-
-#### 节点的添加与删除
-1. createElement创建节点 element.appendChild最父元素尾部追加节点
-```html
-<ul></ul>
-<script>
-  // 1．创建节点元素节点
-  var li1 = document.createElement("li");
-  var li2 = document.createElement("li");
-  //2．添加节点 node.appendChild(child) node 父级 child是子级,是后面追加元素
-  var ul = document.querySelector("ul");
-  ul.appendChild(li1);
-  //3．添加节点 node.insertBefore(child,指定元素) node 父级 child是子级，在指定元素前面追加元素
-  ul.insertBeforeChild(li2, ul.children[0]);
-</script>
-```
-2. element.insertAdjacentHTML(position,text);
-   position是相对元素的位置，并且是以下字符串之一：
-   + 'beforebegin' 元素自身的前面
-   + 'afterbegin' 插入元素内部的第一个节点之前
-   + 'beforeend' 插入元素内部的第一个节点之后
-   + 'afterend' 元素自身的后面
-```html
-<ul>
-  <li></li>
-  <li></li>
-  <li></li>
-</ul>
-<script>
-  var ul = document.querySelector("ul");
-  var li = '<li class="a">123</>'
- ul.insertAdjacentHTML('beforeend',li);//这时ul的长度为4，多出一个<li class="a">123</>
-</script>
-```
-
-
-text是要被解析的HTML或XML，并插入到DOM树中的字符串
-1. 删除节点 node.removeChild(child)
-
-```html
-<ul>
-  <li></li>
-  <li></li>
-  <li></li>
-</ul>
-<script>
-  var ul = document.querySelector("ul");
-  ul.removeChild(ul.children[0]);
-</script>
-node.removeChild(child)这里的node必须是要删除的节点的父节点，child是要删除的节点
-```
-
-##### 阻止链接跳转
-
-javascript:;
-
-```html
-<a href="javascript:;"></a
-><!--可是使链接不进行跳转-->
-```
-
-#### 克隆节点
-
-node.cloneNode(),复制 node
-
-node.cloneNode ()方法返回调用该方法的节点的一个副本。也称为克隆节点/拷贝节点
-
-注意 ∶ 1.如果括号参数为空或者为 false，则是浅拷贝，即只克隆复制节点本身，不克隆里面的子节点。
-⒉.如果括号参数为 true，则是深度拷贝，会复制节点本身以及里面所有的子节点。
-
-```javascript
-var ul = document.querySelector("ul");
-// 1. node.cloneNode();括号为空或者里面是false 浅拷贝只复制标签不复制里面的内容l/
-node.cloneNode(true); //括号为true 深拷贝复制标签复制里面的内容
-
-var lili = ul.children[0].cloneNode(true); //复制ul.children[0]
-ul.appendChild(lili);
-```
-
-1. document.write 是直接将内容写入页面的内容流，但是文档流执行完毕，则它会导致页面全部重绘
-2. innerHTML，是将内容写入某个 DOM 节点，不会导致页面全部重绘
-3. innerHTML 创建多个元素效率更高（拼接字符串效率则会比较低，采取数组形式拼接则效率高），结构稍微复杂
-4. createElement ()创建多个元素效率稍低一点点，但是结构更清晰
 
 ### DOM 重点核心
 

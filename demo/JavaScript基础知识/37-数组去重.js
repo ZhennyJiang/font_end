@@ -13,3 +13,17 @@ function unique(arr) {
   return newArr;
 }
 console.log(unique([1, 2, 2, 3, 4, 4, 5, 6, 6, 8]));
+
+var arr = [45, 62, 32, 52, 412, 45, 45];
+var obj = {};
+for (let i = 0; i < arr.length; i++) {
+  if (typeof obj[arr[i]] === "undefined") {
+    obj[arr[i]] = arr[i];
+  } else {
+    arr[i] = arr[arr.length - 1]; //[45, 62, 32, 52, 412,45] i==4 i==5
+    arr.length--;
+
+    i--;
+  }
+}
+console.log(arr);

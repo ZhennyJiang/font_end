@@ -75,6 +75,26 @@ var a = b = c = 9;
 
 ### 数据类型
 
+基本数据类型
+
+- 数字 number
+  - 数字类型中有一个特殊的值 NaN 代表的不是一个有效数字，但属于 number 类型
+- 字符串 string
+- 布尔 boolean
+- null
+- undefined
+-
+
+复杂数据类型
+
+- 对象 object
+  - 普通对象
+  - 数组对象
+  - 正则对象
+  - 日期对象
+- 函数 function
+- 特殊类型 Symbol
+
 #### 为什么需要数据类型
 
 在计算机中，不同的数据所需占用的存储空间是不同的，为了充分利用存数空间，于是定义了不同的数据类型。
@@ -88,7 +108,7 @@ var x = 10; //number类型
 x = "hhhh"; //字符串类型
 ```
 
-#### 基本数据类型
+### 基本数据类型
 
 | 基本数据类型 | 说明                                               | 默认值    |
 | ------------ | -------------------------------------------------- | --------- |
@@ -131,12 +151,32 @@ var num = Number.MAX_VALUE * 2;
 console.log(num); //Infinity
 ```
 
-#### 验证值是否是 NaN 类型
+### isNaN 检测是否是非有效数字
 
-```JavaScript
-console.log(isNaN(12));  //返回false
-console.log(isNaN('Jenny')); //返回true
+```javascript
+isNaN(123); //false
+isNaN("123"); //false
+isNaN("null"); //false
+isNaN("undefined"); //true
+isNaN({ age: 9 }); //true
+isNaN([12, 23]); //true
+isNaN([12]); //false
+isNaN(/^a/); //true
+isNaN(function () {}); //true
 ```
+
+#### isNaN 检测的机制
+
+1. 首先验证当前要检测的值是否数据字类型的，如果不是，浏览器会默认把值转换为数据类型
+
+- 把非数据类型的值转换为数字
+  - 把其他基本类型转换为数字 => Number(): 例：字符串转换为数字：Number('123') -> 13
+
+* 复杂数据类型的值转换为数字
+  - 调用该数据的 toString 方法转换为字符串，再把字符串调取 Number 转换为数字；例：{age:12} -> "[Object object]" -> NaN
+  - [12,123].toString() -> '12,23' -> NaN
+
+2. 当前检测的值已经是数字类型，是有效数字返回 false，不是则返回 true（数字类型中只有 NaN 不是有效数字，其余都是有效数字）
 
 #### 字符串类型 String
 
@@ -190,6 +230,52 @@ console.log('2'+168); //2168
 
 ```
 
+### boolean 类型转换
+
+**`在js中，只有“0/NaN/空字符串/null/undefined”这五个值转换为布尔类型的false，其余都转为true，如空数组、空对象转换为布尔类型都是true`**
+
+### null 和 undefined
+
+> 都代表空或没
+>
+> - null：空对象指针
+> - undefined：未定义
+
+null 一般是指意料之中的没有，即手动赋值为 null
+
+undefined 代表的是没有一般人都不认为手动控制的，大部分都是浏览器资助自主为空，赋值也可以不赋值；只声明未赋值时，这个变量就为 undefined
+
+### 复杂数据类型
+
+object 对象数据类型
+
+> 普通对象
+>
+> - 由大括号包裹起来
+> - 由零到多组属性名和属性值（键值对）组成
+
+```javascript
+let obj = {
+  name: "jenny",
+  sex: "女",
+};
+//获取属性值
+obj.name;
+obj["name"];
+obj[name]; //name is not defined
+
+var name = "tom";
+
+obj.name; //jenny
+obj["name"]; //jenny
+obj[name]; //相当于obj["tom"] undefined
+
+//彻底删除属性
+delete obj["sex"];
+```
+
+对象的属性名是不允许重复的，是唯一的。
+
 ### prompt 弹出输入框
 
 ```JavaScript
@@ -205,10 +291,19 @@ console.log(Undefined+1); //NaN  Undefined和数字相加，最后结果是NaN
 console.log(null+1); //1
 ```
 
-### typeof 获取数据类型
+### 检测数据类型
+
+- typeof
+- instanceof
+- constructor
+- Object.prototype.toString.call
+
+#### typeof 获取数据类型
 
 ```JavaScript
 console.log(typeof 123);//number
+
+console.log(typeof NaN);//number
 
 console.log(typeof 'Jenny');//string
 
@@ -216,14 +311,76 @@ console.log(typeof true);//boolean
 
 console.log(typeof undefined);//undefined
 
-console.log(typeof null);//object
+console.log(typeof null);//object  因为null代表空对象指针，但没有指向任何的内存空间
+
+console.log(typeof {});//object
+
+console.log(typeof /^a$/);//object
+
+console.log(typeof function(){});//function
+
+console.log(typeof []);//object
 
 console.log(typeof prompt(""));//不管输入什么。在输入框内输入的值都是string类型
 ```
 
 ### 数据类型转换
 
+#### 把其他数据类型转换为 number 类型
+
+1. 发生的情况
+   - isNaN 检测的时候:当检测的值不是数字类型,浏览器会自己调用 Number 方法把它先 2<转换为数字，然后再检测是否为非有效数字
+   - 基于 parseInt\parseFloat\Number 手动转换为数字类型
+   - 数学运算+ - \* / %，但是“ + ”不仅仅是数学运算，还可能是字符串拼接（n++一定是数学运算，n+=+1 可能是字符串拼接）
+2. 转换规律
+   - 默认转换（非人为手动转换）调用 Number 方法
+   - Number("") Number(" ") Number("\n") Number("\t") Number(null) 都是转换为 0
+   - Number(undefined) Number("带有字符串的") 都是转换为 NaN
+   - 引用类型转换为数字，首先调用 toString 方法转换为字符串，再转换为数字
+
+#### 把其他类型值转换为字符串
+
+- 基于 alert/confirm/prompt/document.write 等方法输出内容的时候，会把输出的值转换为字符串再输出
+- 基于“ + ”进行字符串拼接
+- 引用类型转换为数字，首先调用 toString 方法转换为字符串，再转换为数字
+- 给对象设置属性名的时候，如果该属性名不是字符串则先转换为字符串再当做属性存储到对象中
+- 手动调用 toString/toFixed/join/String 等方法的时候
+- [].toString()是空串，{}.toString()是"[object Object]" null.toString() 是"null"
+
+#### 其他值转换为布尔类型
+
+- 基于!/!!/Boolean 等方法的转换
+- 条件判断中的条件
+
+只有 0/NaN/""/null/undefined 五个值会转换为 false，其余都是 true
+
 使用表单或者 prompt 获取过来的数据默认是字符串类型的，当我们需要进行加法运算或其他时，就需要进行数据类型的转换。
+
+#### 特殊转换 "+"
+
+```javascript
+[12] + 10 => '1210' //按理说“ + ”运算在没有字符串的时候是数学运算，有字符串才是字符串拼接
+//但这里，引用类型在转换为数字类型的时候，先转换成字符串，而这里有了字符串，则直接变成了字符串拼接
+
+[] + 10 => "10"
+
+{} + 10 => 10  //在这里是分成了两部分，{}代表一个代码块（块级作用域） +10才是我们的操作
+//相当于 {}；+10
+
+{} + [] => 0
+```
+
+#### 特殊转换 "==" 左右两边的数据类型不一样，则先转换为相同的类型再比较
+
+对象==对象：不一定相等，因为操作的是引用地址，地址不同则不相等
+
+```javascript
+{}=={} => false
+```
+
+除了相同数据类型之间进行比较，其余都是把数据转换为数字再进行比较
+
+NaN 和任何值都不相等，包括它自己
 
 #### 转换成字符串类型
 
@@ -613,6 +770,20 @@ function sayHi() {
 - 如果一个函数有返回值则返回 return 后的值，如果没有 return 则返回 undefined
 - return 除了可以返回结果之外还可以终止函数。在 return 后面的函数不会再执行.
 
+#### 实名函数
+
+`function fn(){}`
+
+#### 匿名函数
+
+- 函数表达式:把一个函数赋值给一个变量
+
+  `var fn = function(){}`
+
+- 立即执行函数
+
+  `~function(){}()`
+
 #### 伪数组
 
 1. 有 length 属性
@@ -621,13 +792,33 @@ function sayHi() {
 
 #### arguments 的使用
 
-当我们不确定有多少个参数传递的时候，可以用 arguments 来获取。在 JavaScript 中，arguments 实际上它是当前函数的一个内置对象。 所有函数都内置了一个 arguments 对象，arguments 对象中存储了传递的所有实参.
+- 当我们不确定有多少个参数传递的时候，可以用 arguments 来获取。
+- 在 JavaScript 中，arguments 实际上它是当前函数的一个内置对象。
+- 所有函数都内置了一个 arguments 对象，arguments 对象中存储了传递的所有实参.
+- 不管是否有实参或形参，arguments 都存在
+- 存在形式：
+
+{
+0: 'a',
+1: 'b',
+length:2,
+callee: 当前函数本身
+}
+
+argumens 是一个类数组，不能调用数组的 api
+
+和...arg 区分：
 
 ```javascript
-function a() {
-  console.log(argument[0]);
+function fn(...arg) {
+  //arg是实参的集合，但它是数组，而arguments是类数组
+  var sum = 0;
+  for (let i = 0; i < arguments.length; i++) {
+    sum += arguments[i];
+  }
+  return sum;
 }
-a(1, 2, 3, 4);
+console.log(fn(1, 5, 6, 9, 10)); //31
 ```
 
 ### javascript 作用域
@@ -743,6 +934,12 @@ console.log(obj.name); // jenny
 ```javascript
 console.log(obj["age"]); // 18 注意，[]里面有单引号包裹属性
 ```
+
+属性名只能是字符串或数字类型。
+
+当我们存储的属性名不是字符串也不是数字的时候，浏览器会把这个值转换为字符串（调用 toString 方法）然后再进行存储
+
+属性名是数字类型只能通过对象名[数字]或对象名['数字']来调用
 
 1. 调用对象的方法 对象名.方法名()
 
@@ -1204,11 +1401,89 @@ console.log(str.lastIndexOf('n'));// 3
 
 charCodeAt()可以用于判断按下的是键盘的哪个键
 
-
 ### 数据类型内存分配
+
 简单类型又叫做基本数据类型或者值类型，复杂类型又叫做引用类型
 
-+ 值类型:简单数据类型/基本数据类型，在存储时变量中存储的是值本身，因此叫做值类型 stringnumber , boolean , undefined , null
+- 值类型:简单数据类型/基本数据类型，在存储时变量中存储的是值本身，因此叫做值类型 stringnumber , boolean , undefined , null
 
-但对null使用typeOf得出的是object，这是js设计公司出现的一个错误，因此当我们定义一个对象但却没想好放什么的时候就可以var a = null;
-+ 引用类型:复杂数据类型，在存储时变量中存储的仅仅是地址(引用)，因此叫做引用数据类型。通过new创建的的对象（系统对象，自定义对象），如object、Array、Date等
+但对 null 使用 typeOf 得出的是 object，这是 js 设计公司出现的一个错误，因此当我们定义一个对象但却没想好放什么的时候就可以 var a = null;
+
+- 引用类型:复杂数据类型，在存储时变量中存储的仅仅是地址(引用)，因此叫做引用数据类型。通过 new 创建的的对象（系统对象，自定义对象），如 object、Array、Date 等
+
+### 浅聊 js 的运行机制（堆栈内存和不同数据类的操作方式）
+
+1.  当浏览器（内核\引擎）渲染和解析 JS 的时候，会提供一个 js 代码运行的环境，我们把这个环境称之为“全局作用域（global\window scope）”
+
+2.  代码自上而下执行（之前还有一个变量提升阶段）
+
+    1） 基本数据类型的值会存储在当前作用域下
+
+    var a = 12;
+
+    - 首先开辟一个栈内存空间存储 a 的值 12
+    - 在当前作用域中声明一个变量 a
+    - 让声明的变量和存储的 12 进行关联
+
+    基本数据类型（也叫作值类型），是按照值来操作的；
+
+         var a = 12;
+         var b = a;
+
+    是把 a 克隆，再赋值给 b，和原有的值没有关系，克隆的 a 的值有一块新的内存空间。此时的 a 和 b 除了值的数据相同之外没有其他关系。
+
+    基本数据类型的值存储的空间也叫作栈内存
+
+    2） 复杂数据类型，按照内存空间的引用地址操作
+
+    引用数据类型的值不能直接存储到当前的作用域下（因为可能存储的内容过于复杂），需要先开辟为一个控件，把内容存储到这个空间中
+
+            var obj1 = {n:100};
+
+    - 首先开辟一个新的堆内存空间，如果是对象：把对象中键值对一次存储起来（为保证后面可以找到这个空间，这个空间有一个 16 进制的地址）；如果是函数：开辟新的堆内存把函数体重的代码当做“字符串”存储到内存中
+    - 声明一个变量
+    - 让变量和空间地址关联在一起（把空间地址赋值给变量）
+
+            var obj1 = {n:100};
+            obj2 = obj1;
+
+    obj1 中存储的是其值的空间地址，obj2 = obj1 是把 obj1 的空间地址赋值给 obj2；这样就出现多个变量关联同一个空间的现象；因此改变 obj2 的这个对象的某个属性值的时候，obj1 当中的数据也会发生改变（改变的都是同一块内存当中的对象）
+
+    复杂数据类型的值存储的空间也叫作堆内存
+
+    ![](img/js执行机制.jpg)
+
+### 函数的执行
+
+目的：把之前存储到堆内存中的代码字符串变为真正的 js 代码自上而下执行，从而实现应有的功能。
+
+1. 函数执行，首先会形成一个私有作用域（一个供代码执行的环境，也是一个栈内存）
+2. 把之前在堆内存中存储的字符串复制一份过来，变为真正的 js 代码，在新开辟的作用域中自上而下执行
+
+### 变量提升机制
+
+当栈内存(作用域)形成，js 代码自上而下执行之前，浏览器首先会把的行提前所有带"VAR"/"FUNCTION”关键词的进行提前"声明”或者"定义”，这种预先处理机制称之为"变量提升”
+
+=>声明(declare) : var a (默认值 undefined)
+
+=>定义(defined) : a=12(定义其实就是赋值操作)
+
+[变量提升阶段]
+
+=>带"VAR"的只声明未定义
+
+=>带"FUNCTION"的声明和赋值都完成了
+（迎合 ES6 中的块级作用域，新版浏览器对于函数（在条件判断中的函数），不管条件是否成立，都只是先声明，没有定义，类似于 VAR）
+
+### 检测某个对象中是否存在某个属性
+
+'属性' in object
+
+```javascript
+var obj = {
+  age: 18,
+  sex: "female",
+};
+console.log("age" in obj); //true
+console.log("a" in obj); //false
+```

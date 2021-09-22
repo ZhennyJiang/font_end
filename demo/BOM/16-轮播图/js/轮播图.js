@@ -8,7 +8,6 @@ window.addEventListener("DOMContentLoaded", function () {
   var num = 0;
   var timerA = setInterval(() => {
     console.log(123);
-
     next.click();
   }, 1500);
   //利用for循环生成circle

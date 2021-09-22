@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script>
+      window.onload = function () {
+        //vue实例
+        const app = new Vue({
+          el: "#app",
+          components: {
+            cpn,
+          },
+        });
+      };
+      //组件
+      const cpn = {
+        template: "#cpn",
+        data() {
+          return {
+            pLanguage: ["a", "b", "c", "d"],
+          };
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <template id="cpn">
+      <div>
+        <slot :data="pLanguage" name="slot1">
+          <ul>
+            <li v-for="item in pLanguage">{{item}}</li>
+          </ul>
+        </slot>
+      </div>
+    </template>
+
+    <div id="app">
+      <cpn></cpn>
+      <cpn>
+        <template v-slot:slot1="slotProps">
+          <div>{{slotProps.data.join()}}</div>
+        </template>
+      </cpn>
+      <!-- 
+      <cpn>
+        <div slot-scope="slot">
+          <div>
+            <span v-for="item in slot.data">{{item}}-</span>
+          </div>
+        </div>
+      </cpn>
+
+      <cpn>
+        <div slot-scope="slot">
+          <div>
+            <span>{{slot.data.join('-')}}</span>
+          </div>
+        </div>
+      </cpn> -->
+    </div>
+  </body>
+</html>
