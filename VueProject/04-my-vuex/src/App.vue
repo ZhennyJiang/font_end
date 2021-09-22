@@ -10,6 +10,8 @@
     <button @click="incrementCount(10)">+10</button>
 
     <h3>{{ $store.state.counter }}</h3>
+    <h4>{{$store.state.info}}</h4>
+    <button @click="updateInfo">change</button>
   </div>
 </template>
 <script>
@@ -20,7 +22,7 @@ export default {
   components: { my },
   data() {
     return {
-      message: "aaa",
+      message: "aaa"
     };
   },
   methods: {
@@ -34,7 +36,12 @@ export default {
     incrementCount(count) {
       this.$store.commit("incrementCount", count);
     },
-  },
+    updateInfo() {
+      this.$store.dispatch("aUpdateInfo", "success").then(res => {
+        console.log(res);
+      });
+    }
+  }
 };
 </script>
 
