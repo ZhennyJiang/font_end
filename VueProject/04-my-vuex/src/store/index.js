@@ -15,6 +15,10 @@ export default createStore({
       state.counter += count;
     },
   },
-  actions: {},
+  actions: {
+    aUpdateInfo(context) {
+      setTimeout(() => {}, 1000);
+    },
+  },
   modules: {},
 });

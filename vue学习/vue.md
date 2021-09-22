@@ -1448,4 +1448,11 @@ Vuex 的 store 中的 state 是响应式的,当 state 中的数据发生改变�
 - 方式二:用新对象给旧对象重新赋值
 - 方式三：Vue.delete(state.obj,deleteProp)
 
-### Mutation 的常量类型
+<strong> Mutation必须进行同步方法，否则devtools无法对操作的变化进行跟踪,如果必须进行异步操作，则在Actoin进行异步操作</strong>
+
+
+
+
+
+
+
