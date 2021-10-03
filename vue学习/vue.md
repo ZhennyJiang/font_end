@@ -1448,18 +1448,288 @@ Vuex 的 store 中的 state 是响应式的,当 state 中的数据发生改变�
 - 方式二:用新对象给旧对象重新赋值
 - 方式三：Vue.delete(state.obj,deleteProp)
 
-<strong> Mutation必须进行同步方法，否则devtools无法对操作的变化进行跟踪,如果必须进行异步操作，则在Action进行异步操作</strong>
+<strong> Mutation 必须进行同步方法，否则 devtools 无法对操作的变化进行跟踪,如果必须进行异步操作，则在 Action 进行异步操作</strong>
 
-### Action
+### Actions
 
-Action类似于Mutation，但是是用来代替Mutation进行异步操作的;使用方法：
+Actions 类似于 Mutations，但是是用来代替 Mutations 进行异步操作的;使用方法：
 
 ![](img/Action1.jpg)
- 
+
 ![](img/Action2.jpg)
 
+actions 的参数的 context 指的是 store
 
+### getters
 
+getters 相当于 vue 的 computed
 
+使用方法：
 
+![](img/getters1.jpg)
 
+![](img/getters2.jpg)
+
+### Modules
+
+Vue 使用单一状态树，这意味着很多状态都会交给 Vuex 来管理，当应用变得很复杂时，store 对象就有可能变得相当臃肿。为了解决这个问题，Vuex 允许我们将 store 分割成模块，每个模块都拥有自己的 state、mutations。actions 等
+
+模块里面的 state、mutations
+
+#### state 用法：
+
+a 是模块
+![](img/modules_state.jpg)
+
+#### mutations 用法：
+
+与全局的 mutations 用法一样
+
+#### getters 用法：
+
+![](img/modules_getters.jpg)
+
+![](img/modules_getters2.jpg)
+
+通过第三个参数获取全局的 state
+
+### axios
+
+#### axios 功能特点：
+
+- 在浏览器中发送 XMLHttpRequests 请求
+- 在 node.js 中发送 http 请求
+- 支持 Promise API
+- 拦截请求和响应转换请求和响应数据等等
+
+#### axios 的请求方式
+
+- axios(config)
+- axios.request(config)
+- axios.get(url[, config])
+- axios.delete(url[, config])
+- axios.head(url[, config])
+- axios.post(url[, data[, config]])
+- axios.put(url[, data[, config]])
+- axios.patch(url[, data[, config]])
+
+#### axios 使用方式：
+
+在 main.js 导入 axios：
+
+     import axios from "axios";
+
+1.
+
+```javascript
+// 1.
+axios({
+  url: "http://.....",
+  methods: "get", //定义get或post请求，不写的话默认是get请求
+}).then((res) => {
+  //axios返回promise并调用resolve
+  console.log(res);
+});
+
+// 2.
+axios.get("http://.....").then((res) => {
+  console.log(res);
+});
+```
+
+2. 发送 get 的信息拼接可以在 config 里添加 params
+
+```javascript
+axios({
+  url: "http://.....",
+  methods: "get",
+  params: {
+    //转门针对get请求的参数拼接
+    type: "sell",
+    page: 1,
+  },
+}).then((res) => {
+  console.log(res);
+});
+```
+
+3. 如果需要实现并行请求，即请求均完成之后再完成某个动作可以使用 axios.all
+
+```javascript
+axios
+  .all([
+    axios({ url: "http://....." }),
+    axios({
+      url: "http://.....",
+      params: {
+        type: "sell",
+        page: 2,
+      },
+    }),
+  ])
+  .then((results) => {
+    console.log(results);
+  });
+```
+
+参数是数组，数组里面装着 n 个网络请求，返回数组，数组里面装着每个请求对应的返回结果
+
+#### axios 全局配置
+
+在上面的示例中，我们的 BaseURL 是固定的，事实上在开发中也有很多参数是固定的，这时候我们可进行一些抽取，也可以利用 axios 的全局配置
+
+```javascript
+axios.defaults.baseURL = "http://...";
+axios.defaults.timeout = 5000;
+```
+
+#### 常见的配置选项
+
+1.  请求地址： url: '/user',
+
+2.  请求类型： method: 'get',
+
+3.  请根路径： baseURL: 'http://www.mt.com/api,
+
+4.  请求前的数据处理： transformRequest:[function(data){}],
+
+5.  请求后的数据处理： transformResponse: [function(data){}],
+
+6.  自定义的请求头： headers:{'x-Requested-With':'XMLHttpRequest'},
+
+7.  URL 查询对象： params:{ id: 12 },
+8.  查询对象序列化函数： paramsSerializer: function(params){}
+9.  request body： data: { key: 'aa'},
+10. 超时设置 s： timeout: 1000,
+11. 跨域是否带 Token： withCredentials: false,
+12. 自定义请求处理： adapter: function(resolve, reject, config){}.
+13. 身份验证信息： auth: { uname: ", pwd: '12'},
+14. 响应的数据格式 json / blob /document /arraybuffer / text/ stream： responseType: 'json',
+
+由于在开发过程中，我们的发送请求的 baseUrl 不一定都想同，因此我们可以创建多个 axios 实例来完成请求
+
+```javascript
+const instance1 = axios.create({
+ baseURL: "http://123.207.32.32:8000",
+ timeout: 5000,
+});
+
+instance1({
+ url: "/home/multidata",
+}).then((res) => {
+ console.log(res);
+});
+
+instance1({
+ url: "/home/data",
+ params: {
+   type: "pop",
+   page: 1,
+ },
+}).then((res) => {
+ console.log(res);
+});
+
+const instance2 = ...
+```
+
+#### 对 axios 进行封装
+
+在 src 创建 network 文件夹，在里面创建 request.js 文件
+
+1.
+
+```javascript
+//request.js
+import axios from "axios";
+export function request(config, success, failure) {
+  const instance = axios.create({
+    baseURL: "http://123.207.32.32:8000",
+    timeout: 5000,
+  });
+  instance(config)
+    .then((res) => {
+      success(res);
+      console.log(success);
+    })
+    .catch((err) => {
+      console.log(err);
+      failure(err);
+    });
+}
+
+//main.js
+
+request({ url: "/home/multidata" }, (res) => {
+  console.log(res);
+});
+```
+
+2. 返回 promise
+
+```javascript
+//request.js
+export function request(config) {
+  return new Promise((resolve, reject) => {
+    const instance = axios.create({
+      baseURL: "http://123.207.32.32:8000",
+      timeout: 5000,
+    });
+    instance(config)
+      .then((res) => {
+        // console.log(res);
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+//main.js
+
+request({ url: "/home/multidata" })
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+```
+
+3. 由于 instance 本身的返回值就是 promise，因此直接返回 instance
+
+```javascript
+//request.js
+export function request(config) {
+  // return new Promise((resolve, reject) => {
+  const instance = axios.create({
+    baseURL: "http://123.207.32.32:8000",
+    timeout: 5000,
+  });
+  return instance(config);
+ });
+}
+
+//main.js
+
+request({ url: "/home/multidata" })
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+```
+
+### axios 拦截器 interceptors
+
+axios 拦截器用于我们在发送每次请求或得到响应后进行的处理（请求/响应，成功/失败）
+
+axios.interceptors 全局拦截
+axios 实例.interceptors 局部拦截
+
+以 axios 的实例 instance 为例：
+
+instance.interceptors.request.use() 请求
+instance.interceptors.response.use() 响应
